@@ -1,4 +1,4 @@
-package com.vehicleservicereservator.VehicleService;
+package com.vehicleservicereservator.VehicleService.Dtos;
 
 import java.util.List;
 
