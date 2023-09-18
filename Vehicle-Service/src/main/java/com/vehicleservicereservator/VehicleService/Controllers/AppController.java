@@ -16,6 +16,7 @@ import org.springframework.stereotype.Controller;
 //import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.*;
 
+import java.text.ParseException;
 import java.util.List;
 
 @RestController
@@ -43,7 +44,7 @@ public class AppController {
 
     @PostMapping("/add-reservation")
     @ResponseBody
-    public String addReservation(@RequestBody VehicleService vehicleService){
+    public String addReservation(@RequestBody VehicleService vehicleService) throws ParseException {
 
         //  System.out.println(email.getEmail());
         return  reservationService.addReservations(vehicleService);

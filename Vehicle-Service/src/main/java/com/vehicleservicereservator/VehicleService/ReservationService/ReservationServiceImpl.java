@@ -5,6 +5,7 @@ import com.vehicleservicereservator.VehicleService.VehicleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.ParseException;
 import java.util.List;
 
 
@@ -22,17 +23,25 @@ public class ReservationServiceImpl implements ReservationService{
     }
 
     @Override
-    public String addReservations(VehicleService vehicleService) {
-        if (vehicleServiceRepo.checkReservations(vehicleService.getVehicle_no())==0){
-            vehicleServiceRepo.save(vehicleService);
-            return "success";
+    public String addReservations(VehicleService vehicleService)  {
+        System.out.println(vehicleService.getDate());
+        System.out.println(vehicleService.getTime());
+
+        DateValidator dateValidator = new DateValidator();
+        if (dateValidator.isDateTodayOrFuture(vehicleService.getDate(),vehicleService.getTime())){
+            if (vehicleServiceRepo.checkReservations(vehicleService.getVehicle_no())==0){
+                vehicleServiceRepo.save(vehicleService);
+                return "success";
+            }else {
+                return "You have a reservation for this vehicle already";
+            }
         }else {
-            return "You have a reservation for this vehicle already";
+            return "Please add future date";
         }
+
+
         // Add email, name , phone
         // Add logic for availabitity
-
-
 
 
     }
