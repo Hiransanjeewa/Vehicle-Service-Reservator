@@ -28,28 +28,36 @@ public class ReservationServiceImpl implements ReservationService{
         System.out.println(vehicleService.getTime());
 
         DateValidator dateValidator = new DateValidator();
+
         if (dateValidator.isDateTodayOrFuture(vehicleService.getDate(),vehicleService.getTime())){
-            if (vehicleServiceRepo.checkReservations(vehicleService.getVehicle_no())==0){
+            VehicleService vehicleService1 = vehicleServiceRepo.getlatestReservation(vehicleService.getVehicle_no());
+            System.out.println(vehicleService1);
+
+            if (dateValidator.isFuture(vehicleService1.getDate(),vehicleService1.getTime())){
                 vehicleServiceRepo.save(vehicleService);
                 return "success";
             }else {
                 return "You have a reservation for this vehicle already";
             }
+
         }else {
             return "Please add future date";
         }
 
-
         // Add email, name , phone
         // Add logic for availabitity
-
 
     }
 
     @Override
     public String deleteReservations(int book_id) {
 
-
-       return vehicleServiceRepo.deleteReservation(book_id);
+        VehicleService vehicleService= vehicleServiceRepo.getReservationByID(book_id);
+        DateValidator dateValidator = new DateValidator();
+        if (dateValidator.isDateTodayOrFuture(vehicleService.getDate(),vehicleService.getTime())) {
+            return vehicleServiceRepo.deleteReservation(book_id);
+        }else {
+            return "Cannot delete past reservations";
+        }
     }
 }

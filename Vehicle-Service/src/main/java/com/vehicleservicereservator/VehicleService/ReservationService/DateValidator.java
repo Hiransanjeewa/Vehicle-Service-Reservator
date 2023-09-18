@@ -3,6 +3,9 @@ package com.vehicleservicereservator.VehicleService.ReservationService;
 import java.sql.Time;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -61,5 +64,27 @@ public class DateValidator {
         return false; // Date is in the past
     }
 
+    public boolean isFuture(Date date, Time time) {
+        String dateStr = date.toString();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSSSSS");
+
+        try {
+            // Parse the input date string into a Date object
+            Date inputDate = dateFormat.parse(dateStr);
+
+            // Get the current date and time
+            Date currentDate = new Date();
+
+            // Compare the parsed date with the current date
+            if (inputDate.after(currentDate)) {
+                System.out.println("The provided date is in the future.");
+            } else {
+                System.out.println("The provided date is in the past.");
+            }
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
 
         }

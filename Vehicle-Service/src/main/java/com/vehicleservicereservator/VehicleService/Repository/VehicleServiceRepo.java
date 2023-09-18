@@ -24,15 +24,15 @@ public interface VehicleServiceRepo extends JpaRepository<VehicleService, Intege
     @Query(value="delete * from vehicle_service where book_id=:book_id", nativeQuery=true)
     String deleteReservation(int book_id);
 
-    @Query(value="SELECT COUNT(*) > 0 AS has_upcoming_reservation\n" +
-            "FROM vehicle_service\n" +
-            "WHERE vehicle_no =:vehicle_no\n" +
-            "  AND date > CURRENT_DATE\n" +
-            "  AND (\n" +
-            "    date = CURRENT_DATE\n" +
-            "    AND time > CURRENT_TIME\n" +
-            "    OR date > CURRENT_DATE\n" +
-            "  ); ", nativeQuery=true)
-    int checkReservations(String vehicle_no);
+    @Query(value="select * from vehicle_service where booking_id=:book_id", nativeQuery=true)
+    VehicleService getReservationByID(int book_id);
+
+
+    @Query(value="SELECT * \n" +
+            "    FROM vehicle_service\n" +
+            "    WHERE vehicle_no = :vehicle_no\n" +
+            "    ORDER BY date DESC\n" +
+            "    LIMIT 1;", nativeQuery=true)
+    VehicleService getlatestReservation(String vehicle_no);
 
 }
