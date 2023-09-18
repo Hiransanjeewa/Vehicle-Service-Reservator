@@ -5,17 +5,20 @@ package com.vehicleservicereservator.VehicleService.Controllers;
 import com.vehicleservicereservator.VehicleService.Dtos.Reservation;
 import com.vehicleservicereservator.VehicleService.ReservationService.ReservationService;
 import com.vehicleservicereservator.VehicleService.ReservationService.ReservationServiceImpl;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.oauth2.core.oidc.user.DefaultOidcUser;
+//import org.springframework.beans.factory.annotation.Autowired;
+//import org.springframework.security.core.Authentication;
+//import org.springframework.security.oauth2.core.oidc.user.DefaultOidcUser;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
+//import org.springframework.ui.Model;
+//import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-@Controller
+@RestController
 public class AppController {
 
 
@@ -31,8 +34,10 @@ public class AppController {
 //    }
 
     @PostMapping("/add-reservation")
-    public List<Reservation> getReservations(String email){
-        return  reservationService.getReservations(email);
+    @ResponseBody
+    public List<Reservation> getReservations(@RequestBody String email){
+
+           return  reservationService.getReservations(email);
     }
 
 }

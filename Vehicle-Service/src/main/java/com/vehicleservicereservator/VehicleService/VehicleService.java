@@ -2,14 +2,14 @@ package com.vehicleservicereservator.VehicleService;
 
 
 import jakarta.persistence.*;
-import org.attoparser.dom.Text;
+//import org.attoparser.dom.Text;
 
 import java.sql.Time;
 import java.util.Date;
 
 @Entity
-@Table(name = "vehicle_service")
-public class vehicle_service {
+@Table(name = "VehicleService")
+public class VehicleService {
 
     @Id
     @Column(name = "booking_id")
@@ -40,14 +40,15 @@ public class vehicle_service {
     @Column(name = "mileage",nullable = false)
     private int mileage;
 
-    @Column(name = "text",nullable = false)
-    private Text text;
+
+    @Column(name = "message" ,columnDefinition = "text")
+    private String message;
 
 
-    public vehicle_service() {
+    public VehicleService() {
     }
 
-    public vehicle_service(int book_id, String name, String email, String phone, Date date, Time time, String location, String vehicle_no, int mileage, Text text) {
+    public VehicleService(int book_id, String name, String email, String phone, Date date, Time time, String location, String vehicle_no, int mileage, String message) {
         this.book_id = book_id;
         this.name = name;
         this.email = email;
@@ -57,7 +58,7 @@ public class vehicle_service {
         this.location = location;
         this.vehicle_no = vehicle_no;
         this.mileage = mileage;
-        this.text = text;
+        this.message = message;
     }
 
     public int getBook_id() {
@@ -132,11 +133,11 @@ public class vehicle_service {
         this.mileage = mileage;
     }
 
-    public Text getText() {
-        return text;
+    public String getMessage() {
+        return message;
     }
 
-    public void setText(Text text) {
-        this.text = text;
+    public void setText(String message) {
+        this.message = message;
     }
 }
