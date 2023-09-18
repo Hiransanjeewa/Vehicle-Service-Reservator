@@ -25,10 +25,10 @@ public class VehicleService {
     @Column(name = "phone",length = 255,nullable = false)
     private String phone;
 
-    @Column(name = "date",nullable = false)
+    @Column(name = "date")
     private Date date;
 
-    @Column(name = "time",nullable = false)
+    @Column(name = "time")
     private Time time;
 
     @Column(name = "location",length = 255,nullable = false)
@@ -41,7 +41,7 @@ public class VehicleService {
     private int mileage;
 
 
-    @Column(name = "message" ,columnDefinition = "text")
+    @Column(name = "message" ,columnDefinition = "text",nullable = true)
     private String message;
 
 

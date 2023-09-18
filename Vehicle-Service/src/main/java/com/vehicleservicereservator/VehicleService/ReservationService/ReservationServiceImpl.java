@@ -1,7 +1,7 @@
 package com.vehicleservicereservator.VehicleService.ReservationService;
 
-import com.vehicleservicereservator.VehicleService.Dtos.Reservation;
 import com.vehicleservicereservator.VehicleService.Repository.VehicleServiceRepo;
+import com.vehicleservicereservator.VehicleService.VehicleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,7 +15,8 @@ public class ReservationServiceImpl implements ReservationService{
     private VehicleServiceRepo vehicleServiceRepo;
 
     @Override
-    public List<Reservation> getReservations(String email) {
+    public List<VehicleService> getReservations(String email) {
+       // System.out.println(email);
        return vehicleServiceRepo.getAllReservations(email);
        // return null;
     }

@@ -11,10 +11,11 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 
+
 @EnableJpaRepositories
 @Repository
-public interface VehicleServiceRepo extends JpaRepository <VehicleService, Integer> {
+public interface VehicleServiceRepo extends JpaRepository<VehicleService, Integer> {
 
-    @Query(value="select * from vehicle_service a where a.email=:email", nativeQuery=true)
-    List<Reservation> getAllReservations(String email);
+    @Query(value="select * from vehicle_service where email=:email", nativeQuery=true)
+    List<VehicleService> getAllReservations(String email);
 }
