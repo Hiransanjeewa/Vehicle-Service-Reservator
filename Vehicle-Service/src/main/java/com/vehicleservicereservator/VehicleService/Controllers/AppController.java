@@ -14,10 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 //import org.springframework.ui.Model;
 //import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -36,12 +33,31 @@ public class AppController {
 //        return "home";
 //    }
 
-    @PostMapping("/add-reservation")
+    @PostMapping("/get-reservations")
     @ResponseBody
     public List<VehicleService> getReservations(@RequestBody Email email){
 
       //  System.out.println(email.getEmail());
            return  reservationService.getReservations(email.getEmail());
     }
+
+    @PostMapping("/add-reservation")
+    @ResponseBody
+    public String addReservation(@RequestBody VehicleService vehicleService){
+
+        //  System.out.println(email.getEmail());
+        return  reservationService.addReservations(vehicleService);
+    }
+
+    @DeleteMapping("/delete-reservation")
+    @ResponseBody
+    public String deleteReservation(@RequestBody int book_id){
+
+        //  System.out.println(email.getEmail());
+
+
+        return reservationService.deleteReservations(book_id) ;
+    }
+
 
 }

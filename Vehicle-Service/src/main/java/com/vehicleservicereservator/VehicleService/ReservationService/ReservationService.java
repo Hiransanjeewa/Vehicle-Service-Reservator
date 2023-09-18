@@ -13,4 +13,7 @@ public interface ReservationService {
 
     List<VehicleService> getReservations (String email);
 
+    String addReservations(VehicleService vehicleService);
+
+    String deleteReservations(int book_id);
 }

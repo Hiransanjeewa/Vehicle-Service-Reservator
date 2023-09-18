@@ -20,4 +20,27 @@ public class ReservationServiceImpl implements ReservationService{
        return vehicleServiceRepo.getAllReservations(email);
        // return null;
     }
+
+    @Override
+    public String addReservations(VehicleService vehicleService) {
+        if (vehicleServiceRepo.checkReservations(vehicleService.getVehicle_no())==0){
+            vehicleServiceRepo.save(vehicleService);
+            return "success";
+        }else {
+            return "You have a reservation for this vehicle already";
+        }
+        // Add email, name , phone
+        // Add logic for availabitity
+
+
+
+
+    }
+
+    @Override
+    public String deleteReservations(int book_id) {
+
+
+       return vehicleServiceRepo.deleteReservation(book_id);
+    }
 }
