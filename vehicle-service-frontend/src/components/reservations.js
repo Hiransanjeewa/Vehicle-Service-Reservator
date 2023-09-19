@@ -4,8 +4,8 @@ import 'bootstrap/dist/css/bootstrap.css';
 import "bootstrap/dist/js/bootstrap.bundle.min";
 import "./reservation.css"
 import  { useState } from 'react';
-//import './scripts';
-import { AddReservationForm }  from './AddReservationForm'; 
+import './scripts';
+import { AddReservationForm }  from './scripts'; 
 
 export default function Reservation() {
 
