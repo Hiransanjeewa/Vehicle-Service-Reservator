@@ -5,6 +5,9 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import Reservation from './components/reservations';
 import ReservationSender from './components/reservationSender';
 import UserProfile from './components/userProfile';
+import BootstrapDatePickerComponent from './components/datePicker';
+//import Date from './components/date';
+
 
 
 
@@ -30,6 +33,13 @@ export default function Home() {
             <div className='maindiv'>
                 <Header setSelectedComponent={setSelectedComponent} />
                 {renderComponent()}
+
+               <BootstrapDatePickerComponent/>
+             
+                
             </div>
+         
+
+           
         );
     }
