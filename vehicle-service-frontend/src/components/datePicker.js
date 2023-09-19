@@ -1,28 +1,45 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Form } from 'react-bootstrap';
 
-class BootstrapDatePickerComponent extends React.Component {
-  render() {
-    const currentDate = new Date().toISOString().split('T')[0]; // Get the current date in the format "YYYY-MM-DD".
+function BootstrapDatePickerComponent() {
+  const [selectedDate, setSelectedDate] = useState('');
+  const currentDate = new Date().toISOString().split('T')[0]; // Get the current date in "YYYY-MM-DD" format
 
-    return (
-      <div>
-        <div className="row">
-          <div className="col-md-4">
-            <Form.Group controlId="dob">
-              <Form.Label>Select Date</Form.Label>
-              <Form.Control
-                type="date"
-                name="dob"
-                placeholder="Reservation Date"
-                min={currentDate} // Set the minimum date to the current date
-              />
-            </Form.Group>
-          </div>
-        </div>
-      </div>
-    );
-  }
+  const handleDateChange = (event) => {
+    const newDate = event.target.value;
+
+    // Check if the selected date is not a Sunday and not a past date
+    if (!isSunday(newDate) && !isPastDate(newDate)) {
+      setSelectedDate(newDate);
+    }
+  };
+
+  const isSunday = (dateString) => {
+    const selectedDate = new Date(dateString);
+    alert('Sorry We are closed on sundays please select different day')
+    setSelectedDate("yyyy-mm-dd");
+    return selectedDate.getDay() === 0; // Sunday corresponds to day 0
+  };
+
+  const isPastDate = (dateString) => {
+    return dateString < currentDate;
+  };
+
+  return (
+    <div>
+      <Form.Group controlId="reservationDate">
+        <Form.Label>Select Date</Form.Label>
+        <Form.Control
+          type="date"
+          name="reservationDate"
+          value={selectedDate}
+          onChange={handleDateChange}
+          min={currentDate}
+        />
+      </Form.Group>
+    </div>
+  );
 }
+
 
 export default BootstrapDatePickerComponent;
