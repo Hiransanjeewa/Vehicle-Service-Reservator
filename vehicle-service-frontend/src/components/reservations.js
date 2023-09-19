@@ -48,6 +48,7 @@ export default function Reservation() {
       <th scope="col">Location</th>
       <th scope="col">Mileage</th>
       <th scope="col">Message</th>
+      <th scope="col">Status</th>
     </tr>
   </thead>
   <tbody>
@@ -57,11 +58,12 @@ export default function Reservation() {
       
       <td> {item.book_id}</td>
       <td> {item.vehicle_no}</td>
-      <td> {item.date}</td>
-      <td> {item.time}</td>
+      <td> {item.date.slice(0, 10)}</td>
+      <td> {item.time.slice(0, 5)}</td>
       <td> {item.location}</td>
       <td> {item.mileage}</td>
       <td> {item.message}</td>
+      <td> Completed</td>
     </tr>
  
 
