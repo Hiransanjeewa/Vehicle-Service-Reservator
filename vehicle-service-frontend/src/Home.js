@@ -6,6 +6,7 @@ import Reservation from './components/reservations';
 import ReservationSender from './components/reservationSender';
 import UserProfile from './components/userProfile';
 import BootstrapDatePickerComponent from './components/datePicker';
+import BootstrapTimePickerComponent from './components/timePicker';
 //import CustomDatePickerComponent from './components/test';
 //import Date from './components/date';
 
@@ -35,7 +36,9 @@ export default function Home() {
                 <Header setSelectedComponent={setSelectedComponent} />
                 {renderComponent()}
 
-               <BootstrapDatePickerComponent/>
+               {/* <BootstrapDatePickerComponent/> */}
+
+               <BootstrapTimePickerComponent/>
        
              
                 
