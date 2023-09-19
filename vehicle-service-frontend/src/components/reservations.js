@@ -2,8 +2,10 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
 import "bootstrap/dist/js/bootstrap.bundle.min";
-import "./header.css"
+import "./reservation.css"
 import  { useState } from 'react';
+import './scripts';
+import { AddReservationForm }  from './scripts'; 
 
 export default function Reservation() {
 
@@ -15,7 +17,7 @@ export default function Reservation() {
           "phone": "4534535324",
           "date": "2023-09-18T00:00:00.000+00:00",
           "time": "17:51:12",
-          "location": "Kurunagla dote",
+          "location": "Nuwara Eliya",
           "vehicle_no": "DJ-0005",
           "mileage": 2344,
           "message": "Gammak thamai"
@@ -30,25 +32,32 @@ export default function Reservation() {
             "location": "Kurunagla dote",
             "vehicle_no": "DJ-0005",
             "mileage": 2346,
-            "message": "Masa ganakin service karala na"
+            "message": "Masa ganakin service karala na dsasda sdas da sdasdas das"
           }
       ];
     
       const [data, setData] = useState(initialData);
-    
+      const addNewReservation =   <td colSpan={8} id='newReservation'>
+      <button onClick={() => AddReservationForm(setNewReservationForm)}>
+          Add New Reservation
+      </button>
+ 
+  </td>
+
+      const [newReservationForm, setNewReservationForm] = useState(addNewReservation);
   return (
     <div>
-        <table class="table table-dark">
+        <table class="table table-dark" id='reservations-table'>
   <thead>
     <tr>
-      <th scope="col">Booking_No</th>
-      <th scope="col">Vehicle_No</th>
-      <th scope="col">Date</th>
-      <th scope="col">Time</th>
-      <th scope="col">Location</th>
-      <th scope="col">Mileage</th>
-      <th scope="col">Message</th>
-      <th scope="col">Status</th>
+      <th scope="col" style={{width:80}}>Booking_No</th>
+      <th scope="col" style={{width:80}}>Vehicle_No</th>
+      <th scope="col" style={{width:80}}>Date</th>
+      <th scope="col" style={{width:70}}>Time</th>
+      <th scope="col" style={{width:100}}>Location</th>
+      <th scope="col" style={{width:80}}>Mileage</th>
+      <th scope="col" style={{width:170}}>Message</th>
+      <th scope="col" style={{width:80}}>Status</th>
     </tr>
   </thead>
   <tbody>
@@ -68,6 +77,12 @@ export default function Reservation() {
  
 
       ))}
+
+   
+       
+        {newReservationForm}
+
+      
       </tbody>
 </table>
 
