@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import BootstrapDatePickerComponent from './datePicker';
 
 
 
@@ -16,13 +17,21 @@ const Districts = [
 
 
 
-    const element = <tr>
+    const element = <tr> 
       <td></td>
-      <td ><input placeholder="vehicle no" style={{width : 100}}/></td>
-      <td ><input placeholder="Date" style={{width : 100}}/></td>
+      <td >
+      <div class="form-group col-md-2" style={{width : 100}}>
+      <label for="inputZip">Vehicle no</label>
+      <input type="text" class="form-control" id="inputZip" placeholder='Vehicle no'/>
+    </div></td>
+      <td >
+        {/* <input placeholder="Date" style={{width : 100}}/> */}
+      <BootstrapDatePickerComponent/>
+      </td>
       <td >
       <label for="inputState">Select Time</label>
-      <select class="form-control" style={{width : 80}}>
+      <select class="form-control" style={{width : 100}}>
+       <option selected>Choose ...</option>
         <option>10 AM</option>
         <option>11 AM</option>
         <option>12 PM</option>
@@ -46,18 +55,22 @@ const Districts = [
       <td >
       <div class="form-group col-md-6" style={{width : 100}}>
       <label for="inputCity">Mileage</label>
-      <input type="number" class="form-control" id="inputMileage" />
+      <input type="number" class="form-control" id="inputMileage" placeholder='mileage'/>
     </div>
     </td>
       <td >
       <div class="form-group col-md-6" style={{width : 180}}>
       <label for="inputCity">Message</label>
-      <input type="textbox" class="form-control" id="inputMessage" />
+      <input type="textbox" class="form-control" id="inputMessage" placeholder='message'/>
     </div>
       </td>
-      <td ><input placeholder="Date" style={{width : 100}}/></td>
-      
+      <td >
+        <br/>
+      <button class="form-control" type='submit' style={{width : 80, height : 40}}>
+      Add </button></td>
+    
     </tr>
+
 
 setter(element)
     // if (element) {

@@ -52,9 +52,9 @@ export default function Reservation() {
     <tr>
       <th scope="col" style={{width:80}}>Booking_No</th>
       <th scope="col" style={{width:80}}>Vehicle_No</th>
-      <th scope="col" style={{width:80}}>Date</th>
+      <th scope="col" style={{width:100}}>Date</th>
       <th scope="col" style={{width:70}}>Time</th>
-      <th scope="col" style={{width:100}}>Location</th>
+      <th scope="col" style={{width:80}}>Location</th>
       <th scope="col" style={{width:80}}>Mileage</th>
       <th scope="col" style={{width:170}}>Message</th>
       <th scope="col" style={{width:80}}>Status</th>

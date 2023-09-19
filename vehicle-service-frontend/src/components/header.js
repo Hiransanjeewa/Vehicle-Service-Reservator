@@ -16,9 +16,9 @@ export default function Home({ setSelectedComponent }) {
         <li class="nav-item">
           <button class="nav-link active" aria-current="page" onClick={() => setSelectedComponent('Reservation')}>Reservations</button>
         </li>
-        <li class="nav-item">
+        {/* <li class="nav-item">
           <button class="nav-link" onClick={() => setSelectedComponent('ReservationSender')}>Add Reservation</button>
-        </li>
+        </li> */}
         <li class="nav-item">
           <button class="nav-link" onClick={() => setSelectedComponent('UserProfile')}>Profile</button>
         </li>

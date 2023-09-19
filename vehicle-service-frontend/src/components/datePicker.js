@@ -28,7 +28,9 @@ function BootstrapDatePickerComponent() {
   return (
     <div>
       <Form.Group controlId="reservationDate">
-        <Form.Label>Select Date (we are closed on sundays )</Form.Label>
+      <label for="inputState">Select Date </label>
+
+      
         <Form.Control
           type="date"
           name="reservationDate"
