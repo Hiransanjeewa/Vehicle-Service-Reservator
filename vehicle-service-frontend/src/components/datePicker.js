@@ -16,9 +16,12 @@ function BootstrapDatePickerComponent() {
 
   const isSunday = (dateString) => {
     const selectedDate = new Date(dateString);
-    alert('Sorry We are closed on sundays please select different day')
     setSelectedDate("yyyy-mm-dd");
-    return selectedDate.getDay() === 0; // Sunday corresponds to day 0
+    if (selectedDate.getDay() === 0) {
+      alert('Sorry We are closed on sundays please select different day')
+      return selectedDate.getDay() === 0; 
+    }
+    // Sunday corresponds to day 0
   };
 
   const isPastDate = (dateString) => {
