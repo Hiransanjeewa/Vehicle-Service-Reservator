@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 
 import java.sql.Time;
 import java.text.ParseException;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 
@@ -33,7 +35,13 @@ public class ReservationServiceImpl implements ReservationService{
         vehicleService.setEmail(reservation.getEmail());
         vehicleService.setVehicle_no(reservation.getVehicle_no());
         vehicleService.setMessage(reservation.getMessage());
-        vehicleService.setLocation(reservation.getLocation());
+        List<String> Districts =new ArrayList<>(Arrays.asList(  "Colombo", "Gampaha", "Kalutara", "Kandy", "Matale", "Nuwara Eliya", "Galle", "Matara", "Hambantota", "Jaffna", "Kilinochchi", "Mannar", "Vavuniya", "Mullaitivu", "Batticaloa", "Ampara", "Trincomalee", "Kurunegala", "Puttalam", "Anuradhapura", "Polonnaruwa", "Badulla", "Moneragala", "Ratnapura", "Kegalle"));
+        if (Districts.contains(reservation.getLocation())) {
+            vehicleService.setLocation(reservation.getLocation());
+        }else {
+            return "Ha Ha Please Select given Locations";
+        }
+
         vehicleService.setMileage(reservation.getMileage());
         vehicleService.setDate(reservation.getDate());
 
@@ -49,12 +57,6 @@ public class ReservationServiceImpl implements ReservationService{
         }else {
             return " Please select a time from a given time options";
         }
-
-
-
-
-
-
 
 
         DateValidator dateValidator = new DateValidator();
@@ -92,7 +94,6 @@ public class ReservationServiceImpl implements ReservationService{
 
         // Add email, name , phone
         // Add logic for availabitity
-
     }
 
     @Override

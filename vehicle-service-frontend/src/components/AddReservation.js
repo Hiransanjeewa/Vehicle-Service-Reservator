@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import BootstrapDatePickerComponent from '../datePicker';
+import BootstrapDatePickerComponent from './datePicker';
 import axios from 'axios';
 
-function AddVehicleNoForm() {
+function AddVehicleNoForm({removeReservationAdder}) {
 
 
     const [newVehicleNo, setVehicleNo] = useState('') 
@@ -94,17 +94,7 @@ function AddVehicleNoForm() {
             return;
           }
 
-        //   const vehicleService = {
-        //     email: "hiransanjeewa@gmail.com",
-        //     phone: "3453453545",
-        //     name : "Hiran Sanjeewa",
-        //     vehicle_no: newVehicleNo,
-        //     date: newDate,
-        //     time: newTime,
-        //     location: newLocation,
-        //     message: newMessage,
-        //     mileage: newMileage,
-        //   };
+
         const vehicleService = {
             book_id: 0,
             name: "Hiran Sanjeewa",
@@ -120,7 +110,7 @@ function AddVehicleNoForm() {
 
 
           try {
-            alert ('You have added all the data correctly')
+           
             // Send the newReservation object to the backend using Axios
             const response = await axios.post('http://localhost:8080/add-reservation', vehicleService, {
               headers: {
@@ -128,7 +118,12 @@ function AddVehicleNoForm() {
               },
               
             });
-            console.log(response)
+            if (response.data==='success') {
+                removeReservationAdder(false)
+            }else {
+              alert (response.data)
+            }
+            
       
             // if (response.status === 200) {
             //   // Handle successful response from the backend
@@ -154,11 +149,10 @@ const Districts = [
   "Colombo", "Gampaha", "Kalutara", "Kandy", "Matale", "Nuwara Eliya", "Galle", "Matara", "Hambantota", "Jaffna", "Kilinochchi", "Mannar", "Vavuniya", "Mullaitivu", "Batticaloa", "Ampara", "Trincomalee", "Kurunegala", "Puttalam", "Anuradhapura", "Polonnaruwa", "Badulla", "Moneragala", "Ratnapura", "Kegalle"
 ]
 
-
   return (
     <tr> 
       <td>
-        {newVehicleNo}
+       
         </td>
       <td >
       <div class="form-group col-md-2" style={{width : 100}}>

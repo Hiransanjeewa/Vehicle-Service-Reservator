@@ -3,9 +3,9 @@ import React, { useState } from 'react';
 import Header from './components/header';
 import "bootstrap/dist/css/bootstrap.min.css";
 import Reservation from './components/reservations';
-import ReservationSender from './components/reservationSender';
+
 import UserProfile from './components/userProfile';
-import ParentComponent from './components/test/Reservation';
+
 
 //import CustomDatePickerComponent from './components/test';
 //import Date from './components/date';
@@ -23,7 +23,7 @@ export default function Home() {
                 case 'Reservation':
                     return <Reservation />;
                 case 'ReservationSender':
-                    return <ReservationSender />;
+                    return <Reservation />;
                 case 'UserProfile':
                     return <UserProfile />;
                 default:

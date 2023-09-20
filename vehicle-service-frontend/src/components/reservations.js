@@ -4,7 +4,7 @@ import 'bootstrap/dist/css/bootstrap.css';
 import "bootstrap/dist/js/bootstrap.bundle.min";
 import "./reservation.css"
 import  { useState } from 'react';
-import AddReservationForm from './test/AddReservation';
+import AddReservationForm from './AddReservation';
 
 
 export default function Reservation() {
@@ -22,6 +22,7 @@ export default function Reservation() {
 
 
   // TEsting
+
 
     const initialData = [
         {
@@ -100,7 +101,7 @@ export default function Reservation() {
       )}
 
       {/* Conditionally render the OtherComponent */}
-      {showOtherComponent && <AddReservationForm />}
+      {showOtherComponent && <AddReservationForm removeReservationAdder={setShowOtherComponent}/>}
     
     
       </tbody>
