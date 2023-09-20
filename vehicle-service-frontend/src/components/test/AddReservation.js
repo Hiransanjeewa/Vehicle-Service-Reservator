@@ -4,47 +4,86 @@ import BootstrapDatePickerComponent from '../datePicker';
 function AddVehicleNoForm() {
 
 
-    const [newVehicleNo, setVehicleNo] = useState( ) 
+    const [newVehicleNo, setVehicleNo] = useState('') 
     const [newDate, setDate] = useState('') 
-    const [newTime, setTime] = useState( ) 
-    const [newLocation, setLocation] = useState( ) 
-    const [newMessage, setMessage] = useState( ) 
-    const [newMileage, setMileage] = useState( ) 
+    const [newTime, setTime] = useState('') 
+    const [newLocation, setLocation] = useState('') 
+    const [newMessage, setMessage] = useState('') 
+    const [newMileage, setMileage] = useState('') 
 
 
       const handleVehicleNoChange = (event) => {
         const newVehicleNo = event.target.value;
         setVehicleNo(newVehicleNo);
       };
-    //   const handleDateChange = (date) => {
-    //     // const newDate = event.target.value;
-    //     setDate(date);
-    //   };
 
-      function addDate(date) {
-         
-      }
       const handleTimeChange = (event) => {
+        //console.log(event.target.value)
         const newTime = event.target.value;
         setTime(newTime);
       };
       const handleMessageChange = (event) => {
+        //console.log(event.target.value)
         const newMessage = event.target.value;
         setMessage(newMessage);
       };
       const handleMileageChange = (event) => {
+        //console.log(event.target.value)
         const newMileage = event.target.value;
         setMileage(newMileage);
       };
       const handleLocationChange = (event) => {
+        //console.log(event.target.value)
         const newLocation = event.target.value;
         setLocation(newLocation);
       };
 
-      const handleSubmit =() => {
-        console.log(newVehicleNo)
-        console.log(newDate)
-        alert ('You have clicked')
+      const handleSubmit =(e) => {
+
+        e.preventDefault(); // Prevent the default form submission behavior
+
+        // Validation checks
+        if (newVehicleNo==='') {
+            alert('Please add your Vehicle No');
+            return;
+        }
+    
+        if (7 > newVehicleNo.length ||  8 <  newVehicleNo.length) {
+          alert('Invalid Vehicle Number');
+          return; // Stop further processing
+        }
+        
+        if (newDate==='') {
+            alert('Please select Date');
+            return;
+        }
+        if (!/^\d{4}-\d{2}-\d{2}$/.test(newDate)) {
+          alert('Invalid date format. Use YYYY-MM-DD.');
+          return;
+        }
+        if (newTime==="") {
+            alert('Please select time for the reservation');
+          return;
+        }
+    
+        if (!['10 AM', '11 AM', '12 PM'].includes(newTime)) {
+          alert('Invalid time. Use 10 AM, 11 AM, or 12 PM.');
+          return;
+        }
+        //console.log(newTime)
+        
+    
+        if (newMileage === '') {
+          alert('Please add mileage of your vehicle');
+          return;
+        }
+        if ( newMileage > 200000 ) {
+            alert('Please add correct mileage of your vehicle');
+            return;
+          }
+
+
+        alert ('You have added all the data correctly')
       }
 
       
@@ -60,7 +99,6 @@ const Districts = [
 
 
 
-
   return (
     <tr> 
       <td>
@@ -69,7 +107,7 @@ const Districts = [
       <td >
       <div class="form-group col-md-2" style={{width : 100}}>
       <label for="inputZip">Vehicle no</label>
-      <input type="text" class="form-control" id="inputZip" placeholder='Vehicle no' name='vehicle_no' 
+      <input type="text" class="form-control" id="inputZip" placeholder='AAA-0001' name='vehicle_no' maxlength="8" 
   onChange={handleVehicleNoChange}
        />
     </div></td>
@@ -79,21 +117,23 @@ const Districts = [
       </td>
       <td >
       <label for="inputState">Select Time</label>
-      <select class="form-control" style={{width : 100}}>
-       <option selected>Choose ...</option>
-        <option>10 AM</option>
-        <option>11 AM</option>
-        <option>12 PM</option>
+      <select class="form-control" style={{width : 100}} name='time'
+        onChange={handleTimeChange}>
+       <option value="" selected>Choose ...</option>
+        <option value='10 AM'>10 AM</option>
+        <option value='11 AM'>11 AM</option>
+        <option value='12 PM'>12 PM</option>
       </select></td>
-      <td >
+      <td>
       
       <div class="form-group col-md-4"  style={{width : 110}}>
       <label for="inputState">Select District</label>
-      <select id="inputState" class="form-control">
-        <option selected>Choose ...</option>
+      <select id="inputState" class="form-control" name='location'
+        onChange={handleLocationChange}>
+        <option selected value="">Choose ...</option>
         {Districts.map((item, index) => (
     
-       <option key={index}>{item}</option>
+       <option key={index} value={item}>{item}</option>
   
    
    ))}
@@ -104,13 +144,15 @@ const Districts = [
       <td >
       <div class="form-group col-md-6" style={{width : 100}}>
       <label for="inputCity">Mileage</label>
-      <input type="number" class="form-control" id="inputMileage" placeholder='mileage'/>
+      <input type="number" class="form-control" id="inputMileage" placeholder='0000' name='mileage'
+        onChange={handleMileageChange}/>
     </div>
     </td>
       <td >
       <div class="form-group col-md-6" style={{width : 180}}>
       <label for="inputCity">Message</label>
-      <input type="textbox" class="form-control" id="inputMessage" placeholder='message'/>
+      <input type="textbox" class="form-control" id="inputMessage" placeholder='message' name='message'
+        onChange={handleMessageChange}/>
     </div>
       </td>
       <td >
