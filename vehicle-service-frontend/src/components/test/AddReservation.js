@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import BootstrapDatePickerComponent from '../datePicker';
+import axios from 'axios';
 
 function AddVehicleNoForm() {
 
@@ -109,7 +110,7 @@ function AddVehicleNoForm() {
           try {
             alert ('You have added all the data correctly')
             // Send the newReservation object to the backend using Axios
-            const response = await axios.post('http://8080/add_reservation', newReservation, {
+            const response = await axios.post('http://localhost:8080/add_reservation', newReservation, {
               headers: {
                 'Content-Type': 'application/json',
               },

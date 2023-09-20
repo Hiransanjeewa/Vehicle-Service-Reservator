@@ -24,20 +24,34 @@ public class ReservationServiceImpl implements ReservationService{
 
     @Override
     public String addReservations(VehicleService vehicleService)  {
-        System.out.println(vehicleService.getDate());
-        System.out.println(vehicleService.getTime());
+//        System.out.println(vehicleService.getDate());
+//        System.out.println(vehicleService.getTime());
 
         DateValidator dateValidator = new DateValidator();
 
-        if (dateValidator.isDateTodayOrFuture(vehicleService.getDate(),vehicleService.getTime())){
-            VehicleService vehicleService1 = vehicleServiceRepo.getlatestReservation(vehicleService.getVehicle_no());
-            System.out.println(vehicleService1);
+//        System.out.println(vehicleService.getDate());
+//        System.out.println(vehicleService.getTime());
 
-            if (dateValidator.isFuture(vehicleService1.getDate(),vehicleService1.getTime())){
+        if (dateValidator.isDateTodayOrFuture(vehicleService.getDate(),vehicleService.getTime())){
+
+            if (vehicleServiceRepo.getlatestReservation(vehicleService.getVehicle_no())!=null){
+                VehicleService vehicleService1 = vehicleServiceRepo.getlatestReservation(vehicleService.getVehicle_no());
+
+//                System.out.println(vehicleService1.getDate());
+//                System.out.println(vehicleService1.getTime());
+//               System.out.println(dateValidator.isDateTodayOrFuture(vehicleService1.getDate(), vehicleService1.getTime()));
+                if (!dateValidator.isDateTodayOrFuture(vehicleService1.getDate(), vehicleService1.getTime())) {
+                    vehicleServiceRepo.save(vehicleService);
+                    return "success";
+                } else {
+                    return "You have a reservation for this vehicle already";
+                }
+            }
+         //   System.out.println(vehicleService1);
+
+             else {
                 vehicleServiceRepo.save(vehicleService);
                 return "success";
-            }else {
-                return "You have a reservation for this vehicle already";
             }
 
         }else {

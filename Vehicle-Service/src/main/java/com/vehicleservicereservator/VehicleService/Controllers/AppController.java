@@ -48,6 +48,8 @@ public class AppController {
 
         //  System.out.println(email.getEmail());
         return  reservationService.addReservations(vehicleService);
+//        System.out.println(vehicleService.getTime());
+//        return "Success";
     }
 
     @DeleteMapping("/delete-reservation")
