@@ -4,31 +4,20 @@ import 'bootstrap/dist/css/bootstrap.css';
 import "bootstrap/dist/js/bootstrap.bundle.min";
 import "./reservation.css"
 import  { useState } from 'react';
-import './AddReservationForm';
-import { AddReservationForm }  from './AddReservationForm'; 
+import AddReservationForm from './test/AddReservation';
+
 
 export default function Reservation() {
 
-  const [newReservation, setNewReservation] = useState({
-   
-    book_id: '',
-    name: '',
-    email: '',
-    phone: '',
-    date: '',
-    time: '',
-    location: '',
-    vehicle_no: '',
-    mileage: 0,
-    message: ''
-  } ) 
+  
 
 
   // Testing
 
-  const handleAddReservation = (formData) => {
-    // Handle the form data here, for example, updating state or making an API call
-    console.log('Form Data:', formData);
+  const [showOtherComponent, setShowOtherComponent] = useState(false);
+
+  const handleClick = () => {
+    setShowOtherComponent(true);
   };
 
 
@@ -62,15 +51,7 @@ export default function Reservation() {
       ];
     
       const [data, setData] = useState(initialData);
-      const addNewReservation =   <td colSpan={8} id='newReservation'>
-      <button onClick={() => AddReservationForm(setNewReservationForm)}>
-          Add New Reservation
-      </button>
- 
-  </td>
-
-      const [newReservationForm, setNewReservationForm] = useState(addNewReservation);
-  return (
+   return (
     <div>
         <table class="table table-dark" id='reservations-table'>
   <thead>
@@ -104,12 +85,28 @@ export default function Reservation() {
       ))}
 
    
+    
+    
+      {!showOtherComponent && (
        
-        {newReservationForm}
+        <td 
+        colSpan={8} 
+       id='newReservation'>
+      <button onClick={handleClick}>
+          Add New Reservation
+      </button>
+  
+  </td>
+      )}
 
-      
+      {/* Conditionally render the OtherComponent */}
+      {showOtherComponent && <AddReservationForm />}
+    
+    
       </tbody>
 </table>
+
+
 
 
 

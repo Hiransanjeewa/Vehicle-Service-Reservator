@@ -1,16 +1,17 @@
 import React, { useState } from 'react';
 import { Form } from 'react-bootstrap';
 
-function BootstrapDatePickerComponent() {
+function BootstrapDatePickerComponent({newDate, setDate}) {
   const [selectedDate, setSelectedDate] = useState('');
   const currentDate = new Date().toISOString().split('T')[0]; // Get the current date in "YYYY-MM-DD" format
 
   const handleDateChange = (event) => {
     const newDate = event.target.value;
-
+    setDate(newDate);
     // Check if the selected date is not a Sunday and not a past date
     if (!isSunday(newDate) && !isPastDate(newDate)) {
       setSelectedDate(newDate);
+      
     }
   };
 

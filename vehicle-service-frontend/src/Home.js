@@ -21,7 +21,7 @@ export default function Home() {
         const renderComponent = () => {
             switch (selectedComponent) {
                 case 'Reservation':
-                    return <ParentComponent />;
+                    return <Reservation />;
                 case 'ReservationSender':
                     return <ReservationSender />;
                 case 'UserProfile':
