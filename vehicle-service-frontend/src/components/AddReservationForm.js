@@ -3,13 +3,22 @@ import BootstrapDatePickerComponent from './datePicker';
 
 
 
-export function AddReservationForm(setter) {
+export function AddReservationForm(ReservationFormSetter) {
   const style = {
     maindiv:{
        backgroundColor: "dark"
     }
-  
 }
+
+// const [formData, setFormData] = useState({
+//   vehicleNo: '',
+//   date: '',
+//   time: '',
+//   district: '',
+//   mileage: '',
+//   message: '',
+// });
+
 const Districts = [
   "Colombo", "Gampaha", " Kalutara", " Kandy", " Matale", " Nuwara Eliya", " Galle", " Matara", "Hambantota", " Jaffna", " Kilinochchi", " Mannar", " Vavuniya", " Mullaitivu", " Batticaloa", " Ampara", " Trincomalee", " Kurunegala", " Puttalam", " Anuradhapura", " Polonnaruwa", " Badulla", " Moneragala", " Ratnapura", " Kegalle"
 ]
@@ -72,9 +81,12 @@ const Districts = [
     </tr>
 
 
-setter(element)
+ReservationFormSetter(element)
     // if (element) {
     //   element.textContent = 'New Content';
     // }
     return null;
   }
+
+
+  //export default AddReservationForm;

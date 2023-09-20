@@ -4,10 +4,35 @@ import 'bootstrap/dist/css/bootstrap.css';
 import "bootstrap/dist/js/bootstrap.bundle.min";
 import "./reservation.css"
 import  { useState } from 'react';
-import './scripts';
-import { AddReservationForm }  from './scripts'; 
+import './AddReservationForm';
+import { AddReservationForm }  from './AddReservationForm'; 
 
 export default function Reservation() {
+
+  const [newReservation, setNewReservation] = useState({
+   
+    book_id: '',
+    name: '',
+    email: '',
+    phone: '',
+    date: '',
+    time: '',
+    location: '',
+    vehicle_no: '',
+    mileage: 0,
+    message: ''
+  } ) 
+
+
+  // Testing
+
+  const handleAddReservation = (formData) => {
+    // Handle the form data here, for example, updating state or making an API call
+    console.log('Form Data:', formData);
+  };
+
+
+  // TEsting
 
     const initialData = [
         {
