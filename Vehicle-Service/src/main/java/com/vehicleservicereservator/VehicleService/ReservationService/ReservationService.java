@@ -13,7 +13,7 @@ public interface ReservationService {
 
     List<VehicleService> getReservations (String email);
 
-    String addReservations(VehicleService vehicleService) throws ParseException;
+    String addReservations(Reservation reservation) throws ParseException;
 
     String deleteReservations(int book_id);
 }

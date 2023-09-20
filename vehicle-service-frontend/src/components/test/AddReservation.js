@@ -94,23 +94,35 @@ function AddVehicleNoForm() {
             return;
           }
 
-          const newReservation = {
+        //   const vehicleService = {
+        //     email: "hiransanjeewa@gmail.com",
+        //     phone: "3453453545",
+        //     name : "Hiran Sanjeewa",
+        //     vehicle_no: newVehicleNo,
+        //     date: newDate,
+        //     time: newTime,
+        //     location: newLocation,
+        //     message: newMessage,
+        //     mileage: newMileage,
+        //   };
+        const vehicleService = {
+            book_id: 0,
+            name: "Hiran Sanjeewa",
             email: "hiransanjeewa@gmail.com",
-            phone: "3453453545",
-            name : "Hiran Sanjeewa",
-            vehicle_no: newVehicleNo,
+            phone: "4534535324",
             date: newDate,
             time: newTime,
             location: newLocation,
-            message: newMessage,
+            vehicle_no: newVehicleNo,
             mileage: newMileage,
-          };
+            message: newMessage
+        }
 
 
           try {
             alert ('You have added all the data correctly')
             // Send the newReservation object to the backend using Axios
-            const response = await axios.post('http://localhost:8080/add_reservation', newReservation, {
+            const response = await axios.post('http://localhost:8080/add-reservation', vehicleService, {
               headers: {
                 'Content-Type': 'application/json',
               },

@@ -20,6 +20,7 @@ import java.text.ParseException;
 import java.util.List;
 
 @RestController
+@CrossOrigin
 public class AppController {
 
 
@@ -44,10 +45,10 @@ public class AppController {
 
     @PostMapping("/add-reservation")
     @ResponseBody
-    public String addReservation(@RequestBody VehicleService vehicleService) throws ParseException {
+    public String addReservation(@RequestBody Reservation reservation) throws ParseException {
 
         //  System.out.println(email.getEmail());
-        return  reservationService.addReservations(vehicleService);
+        return  reservationService.addReservations(reservation);
 //        System.out.println(vehicleService.getTime());
 //        return "Success";
     }
@@ -57,8 +58,6 @@ public class AppController {
     public String deleteReservation(@RequestBody int book_id){
 
         //  System.out.println(email.getEmail());
-
-
         return reservationService.deleteReservations(book_id) ;
     }
 

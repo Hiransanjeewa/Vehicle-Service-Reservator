@@ -137,7 +137,7 @@ public class VehicleService {
         return message;
     }
 
-    public void setText(String message) {
+    public void setMessage(String message) {
         this.message = message;
     }
 }

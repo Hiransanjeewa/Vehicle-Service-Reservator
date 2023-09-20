@@ -1,10 +1,12 @@
 package com.vehicleservicereservator.VehicleService.ReservationService;
 
+import com.vehicleservicereservator.VehicleService.Dtos.Reservation;
 import com.vehicleservicereservator.VehicleService.Repository.VehicleServiceRepo;
 import com.vehicleservicereservator.VehicleService.VehicleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.sql.Time;
 import java.text.ParseException;
 import java.util.List;
 
@@ -23,9 +25,37 @@ public class ReservationServiceImpl implements ReservationService{
     }
 
     @Override
-    public String addReservations(VehicleService vehicleService)  {
-//        System.out.println(vehicleService.getDate());
-//        System.out.println(vehicleService.getTime());
+    public String addReservations(Reservation reservation) throws ParseException {
+
+        VehicleService vehicleService = new VehicleService ();
+
+        vehicleService.setName(reservation.getName());
+        vehicleService.setEmail(reservation.getEmail());
+        vehicleService.setVehicle_no(reservation.getVehicle_no());
+        vehicleService.setMessage(reservation.getMessage());
+        vehicleService.setLocation(reservation.getLocation());
+        vehicleService.setMileage(reservation.getMileage());
+        vehicleService.setDate(reservation.getDate());
+
+
+        String phoneAsString = Long.toString(reservation.getPhone());
+        vehicleService.setPhone(phoneAsString);
+
+        if ((reservation.getTime() == "10 AM")||(reservation.getTime() == "11 AM")||(reservation.getTime() == "12 PM")) {
+            // Convert the string time to Time type
+            Time convertedTime = Reservation.convertStringToTime(reservation.getTime());
+            //  System.out.println(convertedTime);
+            vehicleService.setTime(convertedTime);
+        }else {
+            return " Please select a time from a given time options";
+        }
+
+
+
+
+
+
+
 
         DateValidator dateValidator = new DateValidator();
 
@@ -41,6 +71,7 @@ public class ReservationServiceImpl implements ReservationService{
 //                System.out.println(vehicleService1.getTime());
 //               System.out.println(dateValidator.isDateTodayOrFuture(vehicleService1.getDate(), vehicleService1.getTime()));
                 if (!dateValidator.isDateTodayOrFuture(vehicleService1.getDate(), vehicleService1.getTime())) {
+                    System.out.println("Saving1");
                     vehicleServiceRepo.save(vehicleService);
                     return "success";
                 } else {
@@ -50,6 +81,7 @@ public class ReservationServiceImpl implements ReservationService{
          //   System.out.println(vehicleService1);
 
              else {
+                System.out.println("Saving1");
                 vehicleServiceRepo.save(vehicleService);
                 return "success";
             }
