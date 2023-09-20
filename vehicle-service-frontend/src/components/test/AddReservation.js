@@ -38,7 +38,7 @@ function AddVehicleNoForm() {
         setLocation(newLocation);
       };
 
-      const handleSubmit =(e) => {
+      const handleSubmit =async (e) => {
 
         e.preventDefault(); // Prevent the default form submission behavior
 
@@ -47,7 +47,10 @@ function AddVehicleNoForm() {
             alert('Please add your Vehicle No');
             return;
         }
-    
+        if (/[a-z]/.test(newVehicleNo)) {
+            alert('only capital letters are allowed')
+            return; 
+        }
         if (7 > newVehicleNo.length ||  8 <  newVehicleNo.length) {
           alert('Invalid Vehicle Number');
           return; // Stop further processing
@@ -71,7 +74,15 @@ function AddVehicleNoForm() {
           return;
         }
         //console.log(newTime)
-        
+        if (newLocation === '') {
+            alert('Please select a location')
+             return;
+        }
+        if (!Districts.includes(newLocation)) {
+            console.log('Please select a right location')
+            return;
+          }
+            
     
         if (newMileage === '') {
           alert('Please add mileage of your vehicle');
@@ -82,8 +93,41 @@ function AddVehicleNoForm() {
             return;
           }
 
+          const newReservation = {
+            email: "hiransanjeewa@gmail.com",
+            phone: "3453453545",
+            name : "Hiran Sanjeewa",
+            vehicle_no: newVehicleNo,
+            date: newDate,
+            time: newTime,
+            location: newLocation,
+            message: newMessage,
+            mileage: newMileage,
+          };
 
-        alert ('You have added all the data correctly')
+
+          try {
+            alert ('You have added all the data correctly')
+            // Send the newReservation object to the backend using Axios
+            const response = await axios.post('http://8080/add_reservation', newReservation, {
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              
+            });
+            console.log(response)
+      
+            // if (response.status === 200) {
+            //   // Handle successful response from the backend
+            //   console.log('Reservation successfully sent to the backend.');
+            // } else {
+            //   // Handle errors or unexpected responses
+            //   console.error('Failed to send reservation to the backend.');
+            // }
+          } catch (error) {
+            // Handle network errors or other exceptions
+            console.error('Error:', error);
+          }
       }
 
       
@@ -94,9 +138,8 @@ function AddVehicleNoForm() {
 }
 
 const Districts = [
-  "Colombo", "Gampaha", " Kalutara", " Kandy", " Matale", " Nuwara Eliya", " Galle", " Matara", "Hambantota", " Jaffna", " Kilinochchi", " Mannar", " Vavuniya", " Mullaitivu", " Batticaloa", " Ampara", " Trincomalee", " Kurunegala", " Puttalam", " Anuradhapura", " Polonnaruwa", " Badulla", " Moneragala", " Ratnapura", " Kegalle"
+  "Colombo", "Gampaha", "Kalutara", "Kandy", "Matale", "Nuwara Eliya", "Galle", "Matara", "Hambantota", "Jaffna", "Kilinochchi", "Mannar", "Vavuniya", "Mullaitivu", "Batticaloa", "Ampara", "Trincomalee", "Kurunegala", "Puttalam", "Anuradhapura", "Polonnaruwa", "Badulla", "Moneragala", "Ratnapura", "Kegalle"
 ]
-
 
 
   return (
