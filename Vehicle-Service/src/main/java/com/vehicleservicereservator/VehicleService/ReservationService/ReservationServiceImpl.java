@@ -36,6 +36,7 @@ public class ReservationServiceImpl implements ReservationService{
         vehicleService.setVehicle_no(reservation.getVehicle_no());
         vehicleService.setMessage(reservation.getMessage());
         List<String> Districts =new ArrayList<>(Arrays.asList(  "Colombo", "Gampaha", "Kalutara", "Kandy", "Matale", "Nuwara Eliya", "Galle", "Matara", "Hambantota", "Jaffna", "Kilinochchi", "Mannar", "Vavuniya", "Mullaitivu", "Batticaloa", "Ampara", "Trincomalee", "Kurunegala", "Puttalam", "Anuradhapura", "Polonnaruwa", "Badulla", "Moneragala", "Ratnapura", "Kegalle"));
+
         if (Districts.contains(reservation.getLocation())) {
             vehicleService.setLocation(reservation.getLocation());
         }else {
@@ -49,7 +50,8 @@ public class ReservationServiceImpl implements ReservationService{
         String phoneAsString = Long.toString(reservation.getPhone());
         vehicleService.setPhone(phoneAsString);
 
-        if ((reservation.getTime() == "10 AM")||(reservation.getTime() == "11 AM")||(reservation.getTime() == "12 PM")) {
+        System.out.println(reservation.getTime().equals("10 AM") );
+        if (reservation.getTime().equals("10 AM")||reservation.getTime().equals("11 AM")||reservation.getTime().equals("12 PM")) {
             // Convert the string time to Time type
             Time convertedTime = Reservation.convertStringToTime(reservation.getTime());
             //  System.out.println(convertedTime);
@@ -57,7 +59,6 @@ public class ReservationServiceImpl implements ReservationService{
         }else {
             return " Please select a time from a given time options";
         }
-
 
         DateValidator dateValidator = new DateValidator();
 

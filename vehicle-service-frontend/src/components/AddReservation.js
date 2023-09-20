@@ -125,13 +125,6 @@ function AddVehicleNoForm({removeReservationAdder}) {
             }
             
       
-            // if (response.status === 200) {
-            //   // Handle successful response from the backend
-            //   console.log('Reservation successfully sent to the backend.');
-            // } else {
-            //   // Handle errors or unexpected responses
-            //   console.error('Failed to send reservation to the backend.');
-            // }
           } catch (error) {
             // Handle network errors or other exceptions
             console.error('Error:', error);
