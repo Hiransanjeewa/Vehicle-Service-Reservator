@@ -8,11 +8,12 @@ import AddReservationForm from './AddReservation';
 import axios from 'axios';
 
 
+
+
+
 export default function Reservation() {
 
   
-
-
   // Testing
 
   const [loading, setLoading] = useState(true);
@@ -25,6 +26,7 @@ export default function Reservation() {
   };
 
 
+
   // TEsting
 
   const [reservations, setShowReservations] = useState();
@@ -32,7 +34,7 @@ export default function Reservation() {
       const email = {
         email : "hiransanjeewa@gmail.com" 
       }
-
+      
 
      // var reservationsSet ;
 
@@ -50,11 +52,26 @@ export default function Reservation() {
         fetchData();
       }, []);
 
-      const handleDelete = (event) => {
-         console.log (event.target.value);
-         
-      
-      };
+     
+      const handleDelete = async (event) => {
+
+        if(window.confirm("Are you sure to remove this reservation ?")){
+       
+        
+        const deleteReservationDto = {
+          book_id :  event.target.value
+        }
+        try {
+          const response = await axios.post('http://localhost:8080/delete-reservation',deleteReservationDto);
+          console.log(response.data)
+          fetchData()
+        } catch (error) {
+          console.error('Error fetching data:', error);
+        }
+       }
+       };
+
+
       
       function isFutureTime(timeString) {
       const [hoursString, minutesString] = timeString.split(':');
@@ -79,7 +96,12 @@ export default function Reservation() {
       } }
 
 
+      const upcoming_reservation = {
+        backgroundColor: "yellow",
+        fontStyle: "italic",
+      };
 
+      
       function pastFutureDate(dateString, timeString) {
         const date = new Date(dateString);
       //  console.log(dateString)
@@ -87,12 +109,20 @@ export default function Reservation() {
 // Get the current date
 const currentDate = new Date();
 
+
+ 
+
+
+
 // Check if the date is today or in the future
 //console.log(date +'->'+ currentDate)
 if (date > currentDate) {
+ 
   return true;
 } else if (date.toDateString() === currentDate.toDateString()) {
     if (isFutureTime(timeString)) {
+
+ 
       return true;
     }
     else {
@@ -108,7 +138,7 @@ else {
    
    return (
     <div>
-        <table class="table table-dark" id='reservations-table'>
+        <table class="table " id='reservations-table'>
   <thead>
     <tr>
       <th scope="col" style={{width:80}}>Booking_No</th>
@@ -133,7 +163,13 @@ else {
 
               
              
-    <tr key={index}>
+              <tr
+  
+
+  className={ pastFutureDate(item.date.slice(0, 10), item.time.slice(0, 5))
+    ? "upcoming"
+    : {}}
+    >
       
     <td> {item.book_id}</td>
     <td> {item.vehicle_no}</td>
@@ -146,19 +182,27 @@ else {
     }</td>
     <td> {item.location}</td>
     <td> {item.mileage}</td>
-    <td> {item.message}</td>
-    <td> 
     
     {pastFutureDate(item.date.slice(0, 10),item.time.slice(0, 5)) ? (
-            <button value={item.book_id} class="form-control" onClick={handleDelete} style={{width : 80, height : 40}}>
-            Delete </button>
+    
+           <td> {item.message} <strong>(Upcoming)</strong></td>
           ) : (
+            <td> {item.message}</td>
+          )}
 
+   
+    
+    {pastFutureDate(item.date.slice(0, 10),item.time.slice(0, 5)) ? (
+           <td> 
+            <button value={item.book_id} class="form-control" onClick={handleDelete} style={{width : 80, height : 40}}>
+            Delete </button> </ td> 
+          ) : (
+           <td> 
            <>Completed</> 
-
+           </td>
           )}
     
-    </td>
+    
   </tr>
 
 
