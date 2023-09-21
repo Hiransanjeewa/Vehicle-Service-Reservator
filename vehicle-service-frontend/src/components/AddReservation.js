@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import BootstrapDatePickerComponent from './datePicker';
 import axios from 'axios';
 
-function AddVehicleNoForm({removeReservationAdder}) {
+function AddVehicleNoForm({removeReservationAdder,showReservstions}) {
 
 
     const [newVehicleNo, setVehicleNo] = useState('') 
@@ -119,6 +119,7 @@ function AddVehicleNoForm({removeReservationAdder}) {
               
             });
             if (response.data==='success') {
+              showReservstions()
                 removeReservationAdder(false)
             }else {
               alert (response.data)

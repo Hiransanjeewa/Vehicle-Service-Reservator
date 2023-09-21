@@ -29,54 +29,62 @@ export default function Reservation() {
 
   const [reservations, setShowReservations] = useState();
 
-
-    // const reservations = [
-    //     {
-    //       "book_id": 302,
-    //       "name": "DjGihantha",
-    //       "email": "djgihantha@gmail.com",
-    //       "phone": "4534535324",
-    //       "date": "2023-09-18T00:00:00.000+00:00",
-    //       "time": "17:51:12",
-    //       "location": "Nuwara Eliya",
-    //       "vehicle_no": "DJ-0005",
-    //       "mileage": 2344,
-    //       "message": "Gammak thamai"
-    //     },
-    //     {
-    //         "book_id": 303,
-    //         "name": "GihanthaBro",
-    //         "email": "djgihantha@gmail.com",
-    //         "phone": "4534535324",
-    //         "date": "2023-09-18T00:00:00.000+00:00",
-    //         "time": "17:51:12",
-    //         "location": "Kurunagla dote",
-    //         "vehicle_no": "DJ-0005",
-    //         "mileage": 2346,
-    //         "message": "Masa ganakin service karala na dsasda sdas da sdasdas das"
-    //       }
-    //   ];
-
-
       const email = {
         email : "hiransanjeewa@gmail.com" 
       }
 
 
+
+
       var reservationsSet ;
-      function getReservations() {
-        axios.post(
-          'http://localhost:8080/get-reservations',
-          email,
-          ).then(response=>{
-            reservationsSet = response.data
-         
-            setLoading(false);
-            console.log(response.data)
-           } )
-      }
-      getReservations()
-      setShowReservations(reservationsSet)
+
+      const fetchData = async () => {
+        try {
+          const response = await axios.post('http://localhost:8080/get-reservations',email);
+          setShowReservations(response.data)
+          setLoading(false);
+        } catch (error) {
+          console.error('Error fetching data:', error);
+        }
+      };
+    
+      useEffect(() => {
+        fetchData();
+      }, []);
+
+   
+
+      // useEffect(() => {
+      //   // Define a function to send the request
+      //   const fetchData = async () => {
+      //     try {
+      //       const response = await axios.post('http://localhost:8080/get-reservations',email);
+            // setShowReservations(response.data)
+            // setLoading(false);
+      //       //setData(response.data); // Store the response data in state
+      //     } catch (error) {
+      //       console.error('Error fetching data:', error);
+      //     }
+      //   };
+    
+      //   // Call the fetchData function to send the request when the component mounts
+      //   fetchData();
+      // }, []); // Empty dependency array ensures this effect runs only once
+
+      
+      // // function getReservations() {
+      //   axios.post(
+      //     'http://localhost:8080/get-reservations',
+      //     email,
+      //     ).then(response=>{
+      //       reservationsSet = response.data
+      //       setShowReservations(reservationsSet)
+      //       setLoading(false);
+      //       console.log(response.data)
+      //      } )
+      // // }
+      // // getReservations()
+  
 
      
      
@@ -140,7 +148,7 @@ export default function Reservation() {
       )}
 
       {/* Conditionally render the OtherComponent */}
-      {showOtherComponent && <AddReservationForm removeReservationAdder={setShowOtherComponent}/>}
+      {showOtherComponent && <AddReservationForm removeReservationAdder={setShowOtherComponent} showReservstions= {fetchData}/>}
     
     
       </tbody>
