@@ -103,7 +103,8 @@ public class ReservationServiceImpl implements ReservationService{
         VehicleService vehicleService= vehicleServiceRepo.getReservationByID(book_id);
         DateValidator dateValidator = new DateValidator();
         if (dateValidator.isDateTodayOrFuture(vehicleService.getDate(),vehicleService.getTime())) {
-            return vehicleServiceRepo.deleteReservation(book_id);
+             vehicleServiceRepo.deleteReservation(book_id);
+            return "Reservation Deleted Successfully" ;
         }else {
             return "Cannot delete past reservations";
         }

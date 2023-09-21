@@ -2,6 +2,7 @@ package com.vehicleservicereservator.VehicleService.Controllers;
 
 
 
+import com.vehicleservicereservator.VehicleService.Dtos.DeleteReservationDto;
 import com.vehicleservicereservator.VehicleService.Dtos.Email;
 import com.vehicleservicereservator.VehicleService.Dtos.Reservation;
 import com.vehicleservicereservator.VehicleService.ReservationService.ReservationService;
@@ -53,12 +54,12 @@ public class AppController {
 //        return "Success";
     }
 
-    @DeleteMapping("/delete-reservation")
+    @PostMapping ("/delete-reservation")
     @ResponseBody
-    public String deleteReservation(@RequestBody int book_id){
+    public String deleteReservation(@RequestBody DeleteReservationDto deleteReservationDto){
 
         //  System.out.println(email.getEmail());
-        return reservationService.deleteReservations(book_id) ;
+        return reservationService.deleteReservations(deleteReservationDto.getBook_id()) ;
     }
 
 
