@@ -6,6 +6,7 @@ import Reservation from './components/reservations';
 
 import UserProfile from './components/userProfile';
 import { useAuthContext } from "@asgardeo/auth-react";
+import { setCookie, getCookie, deleteCookie } from "./utils/cookieUtils";
 
 
 
@@ -28,6 +29,7 @@ const { getAccessToken } = useAuthContext();
 
 useEffect(() => {
     getAccessToken().then((accessToken) => {
+        setCookie('Token', accessToken, 30);
         console.log(accessToken);
     }).catch((error) => {
         //console.log(error);

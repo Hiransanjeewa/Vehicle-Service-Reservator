@@ -38,7 +38,21 @@ public class AppController {
 
     @PostMapping("/get-reservations")
     @ResponseBody
-    public List<VehicleService> getReservations(@RequestBody Email email){
+    public List<VehicleService> getReservations(@RequestBody Email email, @RequestHeader("Authorization") String authorizationHeader){
+
+        // Token Testing
+
+        String token = authorizationHeader.substring("Bearer ".length());
+
+        System.out.println(token);
+
+
+
+
+
+
+
+        // End of  Token Testing
 
       //  System.out.println(email.getEmail());
            return  reservationService.getReservations(email.getEmail());

@@ -6,6 +6,7 @@ import "./reservation.css"
 import  { useState } from 'react';
 import AddReservationForm from './AddReservation';
 import axios from 'axios';
+import { getCookie } from '../utils/cookieUtils';
 
 
 
@@ -35,12 +36,18 @@ export default function Reservation() {
         email : "hiransanjeewa@gmail.com" 
       }
       
-
+      const token = getCookie('Token')
      // var reservationsSet ;
+   
 
       const fetchData = async () => {
         try {
-          const response = await axios.post('http://localhost:8080/get-reservations',email);
+          const headers = {
+            'Authorization': `Bearer ${token}`,
+          };
+
+          const response = await axios.post('http://localhost:8080/get-reservations',email,
+          { headers })
           setShowReservations(response.data)
           setLoading(false);
         } catch (error) {
