@@ -1,10 +1,17 @@
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Header from './components/header';
 import "bootstrap/dist/css/bootstrap.min.css";
 import Reservation from './components/reservations';
 
 import UserProfile from './components/userProfile';
+import { useAuthContext } from "@asgardeo/auth-react";
+
+
+
+//import { useAuthContext } from "@asgardeo/auth-react";
+
+
 
 
 //import CustomDatePickerComponent from './components/test';
@@ -14,6 +21,47 @@ import UserProfile from './components/userProfile';
 
 
 export default function Home() {
+
+    const { state, signIn, signOut } = useAuthContext();
+
+const { getAccessToken } = useAuthContext();
+
+useEffect(() => {
+    getAccessToken().then((accessToken) => {
+        console.log(accessToken);
+    }).catch((error) => {
+        //console.log(error);
+    });
+}, []);
+
+
+
+// Identity provider
+//const { state, signIn, signOut } = useAuthContext();
+//<button onClick={ () => signIn() }>Login</button>
+
+// const { getAccessToken } = useAuthContext();
+
+// useEffect(() => {
+//     getAccessToken().then((accessToken) => {
+//         //console.log(accessToken);
+//     }).catch((error) => {
+//         //console.log(error);
+//     });
+// }, []);
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
         const [selectedComponent, setSelectedComponent] = useState('Reservation');
@@ -34,6 +82,7 @@ export default function Home() {
         return (
             <div className='maindiv'>
                 <Header setSelectedComponent={setSelectedComponent} />
+                <button onClick={ () => signIn() }>Login</button>
                 {renderComponent()}
 
                {/* <BootstrapDatePickerComponent/> */}

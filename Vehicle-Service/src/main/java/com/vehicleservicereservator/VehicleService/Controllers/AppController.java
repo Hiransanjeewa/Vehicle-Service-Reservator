@@ -8,8 +8,8 @@ import com.vehicleservicereservator.VehicleService.Dtos.Reservation;
 import com.vehicleservicereservator.VehicleService.ReservationService.ReservationService;
 import com.vehicleservicereservator.VehicleService.ReservationService.ReservationServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.oauth2.core.oidc.user.DefaultOidcUser;
+//import org.springframework.security.core.Authentication;
+//import org.springframework.security.oauth2.core.oidc.user.DefaultOidcUser;
 import com.vehicleservicereservator.VehicleService.VehicleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -28,13 +28,13 @@ public class AppController {
     @Autowired
     private ReservationService reservationService;
 
-    @GetMapping("/")
-    public String currentUserName(Model model, Authentication authentication) {
-        DefaultOidcUser userDetails = (DefaultOidcUser) authentication.getPrincipal();
-        model.addAttribute("userName", userDetails.getName());
-        model.addAttribute("IDTokenClaims", userDetails);
-        return "home";
-    }
+//    @GetMapping("/")
+//    public String currentUserName(Model model, Authentication authentication) {
+//        DefaultOidcUser userDetails = (DefaultOidcUser) authentication.getPrincipal();
+//        model.addAttribute("userName", userDetails.getName());
+//        model.addAttribute("IDTokenClaims", userDetails);
+//        return "home";
+//    }
 
     @PostMapping("/get-reservations")
     @ResponseBody
