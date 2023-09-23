@@ -2,29 +2,17 @@ package com.vehicleservicereservator.VehicleService.Controllers;
 
 
 
-import com.nimbusds.jwt.JWT;
-import com.nimbusds.jwt.JWTParser;
 import com.vehicleservicereservator.VehicleService.Dtos.DeleteReservationDto;
 import com.vehicleservicereservator.VehicleService.Dtos.Email;
 import com.vehicleservicereservator.VehicleService.Dtos.Reservation;
 import com.vehicleservicereservator.VehicleService.ReservationService.ReservationService;
-import com.vehicleservicereservator.VehicleService.ReservationService.ReservationServiceImpl;
-import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.Jwts;
-import org.apache.tomcat.util.http.parser.Authorization;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.oauth2.core.OAuth2AccessToken;
-import org.springframework.security.oauth2.core.oidc.user.DefaultOidcUser;
+
 import com.vehicleservicereservator.VehicleService.VehicleService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
+
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestTemplate;
 
 import java.security.SignatureException;
 import java.text.ParseException;
@@ -38,66 +26,11 @@ public class AppController {
     @Autowired
     private ReservationService reservationService;
 
-//    @GetMapping("/")
-//    public String currentUserName(Model model, Authentication authentication) {
-//        DefaultOidcUser userDetails = (DefaultOidcUser) authentication.getPrincipal();
-//        model.addAttribute("userName", userDetails.getName());
-//        model.addAttribute("IDTokenClaims", userDetails);
-//        return "home";
-//    }
-
-//    @PostMapping("/authenticate")
-//    public String authenticate(@RequestHeader("Authorization") String authorizationHeader) {
-//
-//    }
-
-
-
-
-    @PostMapping("/authenticate")
-    public ResponseEntity<String> authenticate(@RequestHeader("Authorization") String authorizationHeader) {
-        try {
-            String token = authorizationHeader.replace("Bearer ", "");
-
-            // Validate the JWT token
-            Claims claims = Jwts.parser()
-                    .setSigningKey("your-secret-key") // Replace with your JWT secret key
-                    .parseClaimsJws(token)
-                    .getBody();
-
-            // You can now access claims from the JWT and use them for authentication
-            String username = claims.getSubject();
-            List<String> roles = (List<String>) claims.get("roles");
-
-            // Perform authentication logic here...
-            // Check if the user is valid based on the claims
-            // ...
-
-            // If authentication is successful, return a response or generate a new token
-            return ResponseEntity.ok("Authentication successful for user: " + username);
-        } catch (Exception e) {
-            // Other exceptions, e.g., token expired
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Authentication failed: " + e.getMessage());
-        }
-    }
-
-
-
-
-
-
-
-
-
-
-
-
 
 
     @PostMapping("/get-reservations")
     @ResponseBody
     public List<VehicleService> getReservations(@RequestBody Email email, @RequestHeader("Authorization") String authorizationHeader)
-
 
 
     {

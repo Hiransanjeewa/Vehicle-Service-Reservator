@@ -4,14 +4,12 @@ import Home from './Home';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import "bootstrap/dist/css/bootstrap.min.css";
 import { AuthProvider } from "@asgardeo/auth-react";
-import { useAuthContext } from "@asgardeo/auth-react";
-import { useEffect } from 'react';
 
 
 const config = {
-  signInRedirectURL: "http://localhost:3000",
-  signOutRedirectURL: "http://localhost:3000",
-  clientID: "ArEoe_i9eift2yjz2Hfh2Of6Qw0a",
+  signInRedirectURL: "http://localhost:3000/login/oauth2/code/asgardeo",
+  // signOutRedirectURL: "http://localhost:3000",
+  clientID: "vhndrEYdw3C6Iw1JRbbQIwN5Brsa",
   baseUrl: "https://api.asgardeo.io/t/hiran",
   scope: [ "openid","profile","email" ]
 };
