@@ -12,9 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.vehicleservicereservator.VehicleService.VehicleService;
 
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.client.RestTemplate;
 
-import java.security.SignatureException;
+
 import java.text.ParseException;
 import java.util.List;
 
