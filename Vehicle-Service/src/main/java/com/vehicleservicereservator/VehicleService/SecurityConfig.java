@@ -23,8 +23,8 @@ import java.io.IOException;
 import static org.springframework.security.config.Customizer.withDefaults;
 
 
-@Configuration
-@EnableWebSecurity
+//@Configuration
+//@EnableWebSecurity
 public class SecurityConfig {
 
 //    @Bean
@@ -38,25 +38,25 @@ public class SecurityConfig {
 //    }
 
 
-    @Value("${spring.security.oauth2.client.provider.asgardeo.issuer-uri}")
-    String issuerUri;
-
-    @Bean
-    public SecurityFilterChain filterChain(final HttpSecurity http) throws Exception {
-
-        return http
-                .authorizeHttpRequests(authorizeRequests ->
-                        authorizeRequests
-                                .requestMatchers("/").hasAuthority("SCOPE_services:read")
-                                .anyRequest().authenticated()
-                )
-                .oauth2ResourceServer(oauth2ResourceServer ->
-                        oauth2ResourceServer
-                                .jwt(jwt ->
-                                        jwt.decoder(JwtDecoders.fromIssuerLocation(issuerUri))
-                                )
-                ).build();
-    }
+//    @Value("${spring.security.oauth2.client.provider.asgardeo.issuer-uri}")
+//    String issuerUri;
+//
+//    @Bean
+//    public SecurityFilterChain filterChain(final HttpSecurity http) throws Exception {
+//
+//        return http
+//                .authorizeHttpRequests(authorizeRequests ->
+//                        authorizeRequests
+//                                .requestMatchers("/").hasAuthority("SCOPE_services:read")
+//                                .anyRequest().authenticated()
+//                )
+//                .oauth2ResourceServer(oauth2ResourceServer ->
+//                        oauth2ResourceServer
+//                                .jwt(jwt ->
+//                                        jwt.decoder(JwtDecoders.fromIssuerLocation(issuerUri))
+//                                )
+//                ).build();
+//    }
 
 
 }

@@ -39,7 +39,7 @@ async function getAccessToken() {
   async function getJwtToken() {
     const jwtToken = jwtDecode(accessToken);
     setCookie('JwtToken', jwtToken, 30);
-    console.log(jwtToken);
+    //console.log(jwtToken);
   }
 
 

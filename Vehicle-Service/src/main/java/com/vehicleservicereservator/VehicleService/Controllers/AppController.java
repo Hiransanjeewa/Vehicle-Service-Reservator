@@ -26,26 +26,26 @@ import java.util.List;
 @CrossOrigin
 public class AppController {
 
-    @GetMapping("/auth/callback")
-    public String handleAuthCallback(@AuthenticationPrincipal OidcUser oidcUser) {
-        // Access the JWT token from the authenticated user object
-        String jwtToken = oidcUser.getIdToken().getTokenValue();
+//    @GetMapping("/auth/callback")
+//    public String handleAuthCallback(@AuthenticationPrincipal OidcUser oidcUser) {
+//        // Access the JWT token from the authenticated user object
+//        String jwtToken = oidcUser.getIdToken().getTokenValue();
+//
+//        // You can do additional processing here if needed
+//
+//        // Return the JWT token to the frontend
+//        return jwtToken;
+//    }
 
-        // You can do additional processing here if needed
-
-        // Return the JWT token to the frontend
-        return jwtToken;
-    }
 
 
-
-    @GetMapping("/")
-    public String currentUserName(Model model, Authentication authentication) {
-        DefaultOidcUser userDetails = (DefaultOidcUser) authentication.getPrincipal();
-        model.addAttribute("userName", userDetails.getName());
-        model.addAttribute("IDTokenClaims", userDetails);
-        return "home";
-    }
+//    @GetMapping("/")
+//    public String currentUserName(Model model, Authentication authentication) {
+//        DefaultOidcUser userDetails = (DefaultOidcUser) authentication.getPrincipal();
+//        model.addAttribute("userName", userDetails.getName());
+//        model.addAttribute("IDTokenClaims", userDetails);
+//        return "home";
+//    }
 
     @GetMapping("/user")
     public String user(Model model,
@@ -60,6 +60,11 @@ public class AppController {
     private ReservationService reservationService;
 
 
+    @GetMapping("/hello")
+    public String getWelcome (){
+        System.out.println("Triggered");
+        return "Hello";
+    }
 
     @PostMapping("/get-reservations")
     @ResponseBody
@@ -74,9 +79,10 @@ public class AppController {
 
         System.out.println(token);
 
+
         // End of  Token Testing
 
-      //  System.out.println(email.getEmail());
+          System.out.println(email.getEmail());
            return  reservationService.getReservations(email.getEmail());
     }
 
