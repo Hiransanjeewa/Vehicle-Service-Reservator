@@ -28,6 +28,7 @@ useEffect(() => {
         setCookie('Access_Code', accessToken, 30);
         console.log(accessToken);
 
+        
 async function getAccessToken() {
     const response = await axios.post('https://api.asgardio.com/auth/token', {
       access_code: getCookie('Access_Code'),
