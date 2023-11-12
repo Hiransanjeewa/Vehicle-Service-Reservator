@@ -11,10 +11,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.vehicleservicereservator.VehicleService.VehicleService;
 
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.oauth2.core.oidc.user.DefaultOidcUser;
-import org.springframework.security.oauth2.core.oidc.user.OidcUser;
+//import org.springframework.security.core.Authentication;
+//import org.springframework.security.core.annotation.AuthenticationPrincipal;
+//import org.springframework.security.oauth2.core.oidc.user.DefaultOidcUser;
+//import org.springframework.security.oauth2.core.oidc.user.OidcUser;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
@@ -47,13 +47,13 @@ public class AppController {
 //        return "home";
 //    }
 
-    @GetMapping("/user")
-    public String user(Model model,
-                       @AuthenticationPrincipal OidcUser oidcUser) {
-        model.addAttribute("userName", oidcUser.getName());
-        model.addAttribute("audience", oidcUser.getAudience());
-        return "user";
-    }
+//    @GetMapping("/user")
+//    public String user(Model model,
+//                       @AuthenticationPrincipal OidcUser oidcUser) {
+//        model.addAttribute("userName", oidcUser.getName());
+//        model.addAttribute("audience", oidcUser.getAudience());
+//        return "user";
+//    }
 
 
     @Autowired
@@ -68,20 +68,21 @@ public class AppController {
 
     @PostMapping("/get-reservations")
     @ResponseBody
-    public List<VehicleService> getReservations(@RequestBody Email email, @RequestHeader("Authorization") String authorizationHeader)
+  //  public List<VehicleService> getReservations(@RequestBody Email email, @RequestHeader("Authorization") String authorizationHeader)
+    public List<VehicleService> getReservations(@RequestBody Email email)
 
 
     {
 
         // Token Testing
 
-        String token = authorizationHeader.substring("Bearer ".length());
+     //   String token = authorizationHeader.substring("Bearer ".length());
 
-        System.out.println(token);
+    //    System.out.println(token);
 
 
         // End of  Token Testing
-
+        System.out.println('*');
           System.out.println(email.getEmail());
            return  reservationService.getReservations(email.getEmail());
     }
