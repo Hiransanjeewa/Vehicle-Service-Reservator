@@ -9,8 +9,8 @@ import { AuthProvider } from "@asgardeo/auth-react";
 const config = {
   signInRedirectURL: "http://localhost:3000/",
   // signOutRedirectURL: "http://localhost:3000/",
-  clientID: "fMaSTSmswBnMUcTSY3cmJUH5qUAa",
-  baseUrl: "https://api.asgardeo.io/t/hiran",
+  clientID: "8rJB8ldpBjemRk56yPFdlarVVAbM7Aq7",
+  baseUrl: "dev-amepvrpb215sw37t.us.auth0.com",
   scope: [ "openid","profile","email" ]
 };
 function App() {
