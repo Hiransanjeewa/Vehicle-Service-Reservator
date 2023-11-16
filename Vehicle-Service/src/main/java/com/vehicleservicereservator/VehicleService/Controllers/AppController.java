@@ -11,11 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.vehicleservicereservator.VehicleService.VehicleService;
 
-//import org.springframework.security.core.Authentication;
-//import org.springframework.security.core.annotation.AuthenticationPrincipal;
-//import org.springframework.security.oauth2.core.oidc.user.DefaultOidcUser;
-//import org.springframework.security.oauth2.core.oidc.user.OidcUser;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 
@@ -59,9 +54,13 @@ public class AppController {
     @Autowired
     private ReservationService reservationService;
 
-
-    @GetMapping("/hello")
+    @GetMapping("private")
     public String getWelcome (){
+        System.out.println("Triggered");
+        return "Hello";
+    }
+    @GetMapping("/hello")
+    public String getWelcom (){
         System.out.println("Triggered");
         return "Hello";
     }

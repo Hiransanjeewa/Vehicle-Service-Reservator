@@ -31,7 +31,7 @@ const root = createRoot(document.getElementById('root'));
 root.render(
   <Auth0Provider
     domain="vehicle-reservator-organization.us.auth0.com"
-    clientId="6MLmdKrpPqGNUAFPok5B4tCqsHDbUPQx"
+    clientId="zEC8341BoJSDT36XZIgjT3W6S6c66odi"
     authorizationParams={{
       redirect_uri: window.location.origin,
     }}
