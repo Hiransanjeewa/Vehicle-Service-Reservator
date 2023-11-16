@@ -52,21 +52,21 @@ const NavBar = () => {
                   exact
                   activeClassName="router-link-exact-active"
                 >
-                  Home
+                 Reservations
                 </NavLink>
               </NavItem>
-              {isAuthenticated && (
+              {/* {isAuthenticated && ( */}
                 <NavItem>
                   <NavLink
                     tag={RouterNavLink}
-                    to="/external-api"
+                    to="/account"
                     exact
                     activeClassName="router-link-exact-active"
                   >
-                    External API
+                    Account
                   </NavLink>
                 </NavItem>
-              )}
+              {/* )} */}
             </Nav>
             <Nav className="d-none d-md-block" navbar>
               {!isAuthenticated && (

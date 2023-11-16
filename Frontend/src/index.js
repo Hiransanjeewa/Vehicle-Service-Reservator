@@ -30,8 +30,8 @@ const providerConfig = {
 const root = createRoot(document.getElementById('root'));
 root.render(
   <Auth0Provider
-    domain="dev-amepvrpb215sw37t.us.auth0.com"
-    clientId="dkjoUzJW3RrMHtOVZlZ5EDtR7FT8UZhl"
+    domain="vehicle-reservator-organization.us.auth0.com"
+    clientId="zEC8341BoJSDT36XZIgjT3W6S6c66odi"
     authorizationParams={{
       redirect_uri: window.location.origin,
     }}

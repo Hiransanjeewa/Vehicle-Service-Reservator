@@ -19,15 +19,15 @@ import initFontAwesome from "./utils/initFontAwesome";
 initFontAwesome();
 
 const App = () => {
-  const { isLoading, error } = useAuth0();
+ // const { isLoading, error } = useAuth0();
 
-  if (error) {
-    return <div>Oops... {error.message}</div>;
-  }
+  // if (error) {
+  //   return <div>Oops... {error.message}</div>;
+  // }
 
-  if (isLoading) {
-    return <Loading />;
-  }
+  // if (isLoading) {
+  //   return <Loading />;
+  // }
 
   return (
     <Router history={history}>
@@ -37,7 +37,7 @@ const App = () => {
           <Switch>
             <Route path="/" exact component={Home} />
             <Route path="/profile" component={Profile} />
-            <Route path="/external-api" component={ExternalApi} />
+            <Route path="/account" component={ExternalApi} />
           </Switch>
         </Container>
         <Footer />
