@@ -32,6 +32,7 @@ const NavBar = () => {
 
   const logoutWithRedirect = () =>
     logout({
+
         logoutParams: {
           returnTo: window.location.origin,
         }
@@ -157,7 +158,8 @@ const NavBar = () => {
                   <RouterNavLink
                     to="#"
                     id="qsLogoutBtn"
-                    onClick={() => logoutWithRedirect()}
+                    onClick={() => logoutWithRedirect() 
+                  }
                   >
                     Log out
                   </RouterNavLink>

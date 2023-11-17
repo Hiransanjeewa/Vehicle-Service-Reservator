@@ -10,6 +10,8 @@ import Profile from "./views/Profile";
 import ExternalApi from "./views/ExternalApi";
 import { useAuth0 } from "@auth0/auth0-react";
 import history from "./utils/history";
+import { useLocation } from 'react-router-dom'; // Assuming you're using react-router-dom
+
 
 // styles
 import "./App.css";
@@ -19,20 +21,25 @@ import initFontAwesome from "./utils/initFontAwesome";
 initFontAwesome();
 
 const App = () => {
+
    
   const { isAuthenticated ,error,isLoading} = useAuth0();
-  const [actionPerformed, setActionPerformed] = useState(0);
+  //const [actionPerformed, setActionPerformed] = useState(0);
+
+  sessionStorage.setItem('isUserAuthenticated',!isAuthenticated)
+
+  const [isUserAuthenticated, setIsUserAuthenticated] = useState(() =>
+    sessionStorage.getItem('isUserAuthenticated') === 'true'
+  );
+  //console.log(isAuthenticated)
+  console.log(isUserAuthenticated)
+  console.log(sessionStorage.getItem('isUserAuthenticated'))
+
 
   useEffect(() => {
-    // Check if the action has been performed in sessionStorage
-    const hasActionPerformed = sessionStorage.getItem('actionPerformed');
 
-    // if (!isAuthenticated) {
-    //   sessionStorage.setItem('actionPerformed', '0');
-    // }
+    if (isAuthenticated && !sessionStorage.getItem('isUserAuthenticated')) {
 
-    if (isAuthenticated && hasActionPerformed!=1) {
-      // Build the Auth0 authorization URL
       const authUrl =
         'https://vehicle-reservator-organization.us.auth0.com/authorize' +
         '?response_type=code' +
@@ -40,22 +47,23 @@ const App = () => {
         '&redirect_uri=http://localhost:3000' +
         '&audience=https://vehicle-service-api.com';
 
-      // Redirect the user to the Auth0 authorization URL
-      sessionStorage.setItem('actionPerformed', '1');
+    // Redirect the user to the Auth0 authorization URL
       window.location.href = authUrl;
       const urlSearchParams = new URLSearchParams(window.location.search);
     
       // Access a specific parameter
-      const myParam = urlSearchParams.get('myParam');
+      const myParam = urlSearchParams.get('code');
       console.log('Value of myParam:', myParam);
     } else {
-     // console.log('User is already authenticated');
+      //sessionStorage.setItem('isUserAuthenticated',isAuthenticated)
     }
   }, [isAuthenticated]);
 
   if (error) {
     return <div>Oops... {error.message}</div>;
   }
+
+
 
   if (isLoading) {
     return <Loading />;
