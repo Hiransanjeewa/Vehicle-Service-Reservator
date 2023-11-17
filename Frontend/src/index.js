@@ -7,6 +7,8 @@ import { Auth0Provider } from "@auth0/auth0-react";
 import history from "./utils/history";
 import { getConfig } from "./config";
 
+
+
 const onRedirectCallback = (appState) => {
   history.push(
     appState && appState.returnTo ? appState.returnTo : window.location.pathname
@@ -28,15 +30,22 @@ const providerConfig = {
 };
 
 const root = createRoot(document.getElementById('root'));
+
+
+
 root.render(
   <Auth0Provider
     domain="vehicle-reservator-organization.us.auth0.com"
-    clientId="zEC8341BoJSDT36XZIgjT3W6S6c66odi"
+    clientId="6MLmdKrpPqGNUAFPok5B4tCqsHDbUPQx"
+    audience="https://vehicle-service-api.com"
+    redirect_uri="http://localhost:3000"
     authorizationParams={{
       redirect_uri: window.location.origin,
     }}
   >
     <App />
+  
+
   </Auth0Provider>
 );
 
@@ -45,5 +54,7 @@ root.render(
 // unregister() to register() below. Note this comes with some pitfalls.
 // Learn more about service workers: https://bit.ly/CRA-PWA
 serviceWorker.unregister();
+
+
 
 
