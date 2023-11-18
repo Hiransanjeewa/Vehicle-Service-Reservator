@@ -1,7 +1,9 @@
 package com.vehicleservicereservator.VehicleService.Dtos;
-
 public class Access_Code {
-    private String code ;
+    private String code;
+
+    public Access_Code() {
+    }
 
     public Access_Code(String code) {
         this.code = code;
@@ -13,8 +15,5 @@ public class Access_Code {
 
     public void setCode(String code) {
         this.code = code;
-    }
-
-    public Access_Code() {
     }
 }

@@ -19,6 +19,7 @@ import java.text.ParseException;
 import java.util.List;
 
 @RestController
+@RequestMapping(path = "/api")
 @CrossOrigin
 public class AppController {
 
@@ -51,6 +52,12 @@ public class AppController {
 //        return "user";
 //    }
 
+//    @GetMapping("/public")
+//    public String getWelcome (){
+//        System.out.println("Triggered");
+//        return "Hello";
+//    }
+
 
     @Autowired
     private ReservationService reservationService;
@@ -58,15 +65,11 @@ public class AppController {
     @GetMapping("/public")
     public String getToken (@RequestParam Access_Code access_code){
         System.out.println("Access-Code-Received");
-        System.out.println("Access-Token : "+ access_code.getCode());
+        System.out.println("Access-Token : "+ access_code);
         return "Hello";
     }
 
-    @GetMapping("/private")
-    public String getWelcome (){
-        System.out.println("Triggered");
-        return "Hello";
-    }
+
 
 
     @PostMapping("/get-reservations")

@@ -25,23 +25,22 @@ const App = () => {
 
    
   const { isAuthenticated ,error,isLoading} = useAuth0();
-  //const [actionPerformed, setActionPerformed] = useState(0);
-
-  sessionStorage.setItem('isUserAuthenticated',!isAuthenticated)
-
-  const [isUserAuthenticated, setIsUserAuthenticated] = useState(() =>
-    sessionStorage.getItem('isUserAuthenticated') === 'true'
-  );
-  //console.log(isAuthenticated)
-  console.log(isUserAuthenticated)
-  console.log(sessionStorage.getItem('isUserAuthenticated'))
 
 
   useEffect(() => {
 
-    if (isAuthenticated && !sessionStorage.getItem('isUserAuthenticated')) {
 
+   // sessionStorage.setItem('isUserAuthenticated',0)
+    if ((sessionStorage.getItem('isUserAuthenticated')!=1)&&isAuthenticated) {
+    //   console.log('****')
+    // }
+
+   // if (isAuthenticated && !sessionStorage.getItem('isUserAuthenticated')) {
+
+   // MAke this true only the access code is correct
+     sessionStorage.setItem('isUserAuthenticated',1)
       console.log('Passed')
+      
       const authUrl =
         'https://vehicle-reservator-organization.us.auth0.com/authorize' +
         '?response_type=code' +
@@ -51,11 +50,9 @@ const App = () => {
 
     // Redirect the user to the Auth0 authorization URL
       window.location.href = authUrl;
-      const urlSearchParams = new URLSearchParams(window.location.search);
     
-      // Access a specific parameter
-      const myParam = urlSearchParams.get('code');
-      console.log('Value of myParam:', myParam);
+    } else if ((sessionStorage.getItem('isTokenGenerated')!=1)&& isAuthenticated  ) {
+
 
       const sendAccessCode = async () => {
         try {
@@ -64,10 +61,13 @@ const App = () => {
             code : "hello"
           };
   
-          const response = await axios.post('http://localhost:8080/public', accessCodeObject);
-  
+          const response = await axios.get('http://localhost:8080/api/public?access_code='+accessCodeObject.code);
+          
           // Handle the response here
           console.log('Response:', response.data);
+          sessionStorage.setItem('isTokenGenerated',1)
+
+          
         } catch (error) {
           // Handle errors here
           console.error('Error:', error);
@@ -76,11 +76,16 @@ const App = () => {
   
       // Call the function when the component mounts
       sendAccessCode();
-    } else {
-      //sessionStorage.setItem('isUserAuthenticated',isAuthenticated)
+
+      
     }
   }, [isAuthenticated]);
 
+
+
+
+
+ // sessionStorage.setItem('isUserAuthenticated',false)
 
  
 
