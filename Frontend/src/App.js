@@ -29,13 +29,12 @@ const App = () => {
 
   useEffect(() => {
 
+   // sessionStorage.setItem('isUserAuthenticated',0)
 
    // sessionStorage.setItem('isUserAuthenticated',0)
     if ((sessionStorage.getItem('isUserAuthenticated')!=1)&&isAuthenticated) {
     //   console.log('****')
     // }
-
-   // if (isAuthenticated && !sessionStorage.getItem('isUserAuthenticated')) {
 
    // MAke this true only the access code is correct
      sessionStorage.setItem('isUserAuthenticated',1)
@@ -60,8 +59,17 @@ const App = () => {
           const accessCodeObject = {
             code : "hello"
           };
+
+          const queryString = window.location.search;
+          const urlParams = new URLSearchParams(queryString);
+          const code = urlParams.get('code');
+      
+          // Now you can use the code in your component
+          console.log('Code from URL:', code);
+      
+
   
-          const response = await axios.get('http://localhost:8080/api/public?access_code='+accessCodeObject.code);
+          const response = await axios.get('http://localhost:8080/api/public?code='+code);
           
           // Handle the response here
           console.log('Response:', response.data);
@@ -82,7 +90,7 @@ const App = () => {
   }, [isAuthenticated]);
 
 
-
+ // sessionStorage.setItem('isTokenGenerated',0)
 
 
  // sessionStorage.setItem('isUserAuthenticated',false)
@@ -99,31 +107,6 @@ const App = () => {
     return <Loading />;
   }
 
- 
-
- //const { isAuthenticated, user, getAccessTokenSilently } = useAuth0();
-
-  // You can use other properties/methods from the useAuth0 hook as needed
-
-  // const handleSomeAction = async () => {
-  //   if (isAuthenticated) {
-  //     try {
-  //       // Get an access token silently (if needed)
-  //       const accessToken = await getAccessTokenSilently();
-
-  //       // Perform actions with the access token, if necessary
-
-  //       console.log(accessToken);
-  //       // Note: If you need the authorization code, you may need to use the Auth0 SPA SDK events.
-  //       // The Auth0Provider might not expose the authorization code directly.
-
-  //     } catch (error) {
-  //       console.error('Error getting access token:', error);
-  //     }
-  //   }
-  // };
-
-  // handleSomeAction()
 
 
 

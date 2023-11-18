@@ -63,9 +63,9 @@ public class AppController {
     private ReservationService reservationService;
 
     @GetMapping("/public")
-    public String getToken (@RequestParam Access_Code access_code){
+    public String getToken (@RequestParam String code){
         System.out.println("Access-Code-Received");
-        System.out.println("Access-Token : "+ access_code);
+        System.out.println("Access-Token : "+ code);
         return "Hello";
     }
 
