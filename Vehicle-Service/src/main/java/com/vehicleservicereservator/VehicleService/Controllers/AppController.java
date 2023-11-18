@@ -2,6 +2,7 @@ package com.vehicleservicereservator.VehicleService.Controllers;
 
 
 
+import com.vehicleservicereservator.VehicleService.Dtos.Access_Code;
 import com.vehicleservicereservator.VehicleService.Dtos.DeleteReservationDto;
 import com.vehicleservicereservator.VehicleService.Dtos.Email;
 import com.vehicleservicereservator.VehicleService.Dtos.Reservation;
@@ -54,16 +55,19 @@ public class AppController {
     @Autowired
     private ReservationService reservationService;
 
-    @GetMapping("private")
+    @GetMapping("/public")
+    public String getToken (@RequestParam Access_Code access_code){
+        System.out.println("Access-Code-Received");
+        System.out.println("Access-Token : "+ access_code.getCode());
+        return "Hello";
+    }
+
+    @GetMapping("/private")
     public String getWelcome (){
         System.out.println("Triggered");
         return "Hello";
     }
-    @GetMapping("/hello")
-    public String getWelcom (){
-        System.out.println("Triggered");
-        return "Hello";
-    }
+
 
     @PostMapping("/get-reservations")
     @ResponseBody

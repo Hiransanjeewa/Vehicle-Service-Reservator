@@ -18,6 +18,7 @@ import "./App.css";
 
 // fontawesome
 import initFontAwesome from "./utils/initFontAwesome";
+import axios from "axios";
 initFontAwesome();
 
 const App = () => {
@@ -40,6 +41,7 @@ const App = () => {
 
     if (isAuthenticated && !sessionStorage.getItem('isUserAuthenticated')) {
 
+      console.log('Passed')
       const authUrl =
         'https://vehicle-reservator-organization.us.auth0.com/authorize' +
         '?response_type=code' +
@@ -54,10 +56,33 @@ const App = () => {
       // Access a specific parameter
       const myParam = urlSearchParams.get('code');
       console.log('Value of myParam:', myParam);
+
+      const sendAccessCode = async () => {
+        try {
+          // Replace 'your-access-code-object' with the actual access code object
+          const accessCodeObject = {
+            code : "hello"
+          };
+  
+          const response = await axios.post('http://localhost:8080/public', accessCodeObject);
+  
+          // Handle the response here
+          console.log('Response:', response.data);
+        } catch (error) {
+          // Handle errors here
+          console.error('Error:', error);
+        }
+      };
+  
+      // Call the function when the component mounts
+      sendAccessCode();
     } else {
       //sessionStorage.setItem('isUserAuthenticated',isAuthenticated)
     }
   }, [isAuthenticated]);
+
+
+ 
 
   if (error) {
     return <div>Oops... {error.message}</div>;
@@ -92,7 +117,6 @@ const App = () => {
   //     }
   //   }
   // };
-
 
   // handleSomeAction()
 

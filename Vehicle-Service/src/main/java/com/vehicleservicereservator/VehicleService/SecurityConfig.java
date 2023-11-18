@@ -23,7 +23,7 @@ public class SecurityConfig {
         */
         return http
                 .authorizeHttpRequests((authorize) -> authorize
-                    .requestMatchers("/hello").permitAll()
+                    .requestMatchers("/public").permitAll()
                     .requestMatchers("/private").authenticated()
                     .requestMatchers("/api/private-scoped").hasAuthority("SCOPE_read:messages")
                 )
