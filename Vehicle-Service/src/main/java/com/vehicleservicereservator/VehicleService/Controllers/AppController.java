@@ -2,7 +2,9 @@ package com.vehicleservicereservator.VehicleService.Controllers;
 
 
 
-import com.vehicleservicereservator.VehicleService.AuthorizationService.Auth0TokenGenerator;
+import com.auth0.client.auth.AuthAPI;
+import com.auth0.json.auth.TokenHolder;
+import com.auth0.net.Request;
 import com.vehicleservicereservator.VehicleService.Dtos.DeleteReservationDto;
 import com.vehicleservicereservator.VehicleService.Dtos.Email;
 import com.vehicleservicereservator.VehicleService.Dtos.Reservation;
@@ -12,11 +14,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.vehicleservicereservator.VehicleService.VehicleService;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
 
 
 import java.text.ParseException;
 import java.util.List;
+
 
 @RestController
 @RequestMapping(path = "/api")
@@ -58,31 +62,47 @@ public class AppController {
 //        return "Hello";
 //    }
 
+    private final ReservationService reservationService;
+    private final String clientId;
+    private final String clientSecret;
+    private final String domain;
 
     @Autowired
-    private ReservationService reservationService;
-
+    public AppController(
+            ReservationService reservationService,
+            @Value("${auth0.clientId}") String clientId,
+            @Value("${auth0.clientSecret}") String clientSecret,
+            @Value("${auth0.domain}") String domain) {
+        this.reservationService = reservationService;
+        this.clientId = clientId;
+        this.clientSecret = clientSecret;
+        this.domain = domain;
+    }
 
 
     @GetMapping("/public")
     public String getToken(@RequestParam String code) {
-        System.out.println("Access Code Received: " + code);
 
-    //    Auth0TokenGenerator auth0TokenGenerator;
+            System.out.println("Access Code Received: " + code);
+
+            AuthAPI authAPI = new AuthAPI(domain, clientId, clientSecret);
+
+            Request<TokenHolder> tokenRequest = authAPI.exchangeCode(code, "http://localhost:3000");
+
+            try {
+                TokenHolder tokenHolder = tokenRequest.execute();
+                String accessToken = tokenHolder.getAccessToken();
+                System.out.println(accessToken);
+                return accessToken;
+            } catch (Exception e) {
+                // Handle exception appropriately
+                e.printStackTrace();
+                return "Error exchanging code for token";
+            }
+        }
+        //return "Hello";
 
 
-        // Exchange the authorization code for an access token
-      //  String accessToken = exchangeCodeForAccessToken(code);
-     //   System.out.println("Access Token: " + accessToken);
-
-        // String accessToken = String.valueOf(auth0TokenGenerator.exchangeCodeForAccessToken(code));
-
-        // System.out.println("Access Token: " + accessToken);
-
-
-
-        return "Hello";
-    }
 
 
 //    private String exchangeCodeForAccessToken(String code) {

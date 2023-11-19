@@ -27,6 +27,13 @@
         </dependency>
 
         <dependency>
+            <groupId>com.auth0</groupId>
+            <artifactId>auth0</artifactId>
+            <version>1.27.0</version> <!-- Make sure to use the latest version -->
+        </dependency>
+
+
+        <dependency>
             <groupId>com.okta.spring</groupId>
             <artifactId>okta-spring-boot-starter</artifactId>
             <version>3.0.5</version>

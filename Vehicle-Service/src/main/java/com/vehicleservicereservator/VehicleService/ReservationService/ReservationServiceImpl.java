@@ -4,6 +4,7 @@ import com.vehicleservicereservator.VehicleService.Dtos.Reservation;
 import com.vehicleservicereservator.VehicleService.Repository.VehicleServiceRepo;
 import com.vehicleservicereservator.VehicleService.VehicleService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.sql.Time;
