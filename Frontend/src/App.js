@@ -73,6 +73,13 @@ const App = () => {
           
           // Handle the response here
           console.log('Response:', response.data);
+
+          // Storing the JWT access token
+          sessionStorage.setItem('accessToken', response.data);
+
+          // Retrieve token from sessionStorage
+           const storedToken = sessionStorage.getItem('accessToken');
+
           sessionStorage.setItem('isTokenGenerated',1)
 
           
