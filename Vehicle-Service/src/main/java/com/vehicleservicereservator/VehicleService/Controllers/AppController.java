@@ -2,7 +2,7 @@ package com.vehicleservicereservator.VehicleService.Controllers;
 
 
 
-import com.vehicleservicereservator.VehicleService.Dtos.Access_Code;
+import com.vehicleservicereservator.VehicleService.AuthorizationService.Auth0TokenGenerator;
 import com.vehicleservicereservator.VehicleService.Dtos.DeleteReservationDto;
 import com.vehicleservicereservator.VehicleService.Dtos.Email;
 import com.vehicleservicereservator.VehicleService.Dtos.Reservation;
@@ -62,14 +62,53 @@ public class AppController {
     @Autowired
     private ReservationService reservationService;
 
+
+
     @GetMapping("/public")
-    public String getToken (@RequestParam String code){
-        System.out.println("Access-Code-Received");
-        System.out.println("Access-Token : "+ code);
+    public String getToken(@RequestParam String code) {
+        System.out.println("Access Code Received: " + code);
+
+    //    Auth0TokenGenerator auth0TokenGenerator;
+
+
+        // Exchange the authorization code for an access token
+      //  String accessToken = exchangeCodeForAccessToken(code);
+     //   System.out.println("Access Token: " + accessToken);
+
+        // String accessToken = String.valueOf(auth0TokenGenerator.exchangeCodeForAccessToken(code));
+
+        // System.out.println("Access Token: " + accessToken);
+
+
+
         return "Hello";
     }
 
 
+//    private String exchangeCodeForAccessToken(String code) {
+//        HttpHeaders headers = new HttpHeaders();
+//        headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
+//
+//        Map<String, String> requestBody = new HashMap<>();
+//        requestBody.put("grant_type", "authorization_code");
+//        requestBody.put("client_id", clientId);
+//        requestBody.put("client_secret", clientSecret);
+//        requestBody.put("code", code);
+//        requestBody.put("redirect_uri", "http://localhost:3000"); // Replace with your actual redirect URI
+//
+//        HttpEntity<Map<String, String>> requestEntity = new HttpEntity<>(requestBody, headers);
+//
+//        ResponseEntity<Map> responseEntity = new RestTemplate().postForEntity("https://your-auth0-tenant.auth0.com/oauth/token", requestEntity, Map.class);
+//
+//        if (responseEntity.getStatusCode() == HttpStatus.OK) {
+//            return responseEntity.getBody().get("access_token").toString();
+//        } else {
+//            // Handle error
+//            throw new RuntimeException("Failed to retrieve access token");
+//        }
+
+
+ //   }
 
 
     @PostMapping("/get-reservations")
