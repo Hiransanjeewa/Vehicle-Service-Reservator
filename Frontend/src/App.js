@@ -72,13 +72,13 @@ const App = () => {
           const response = await axios.get('http://localhost:8080/api/public?code='+code);
           
           // Handle the response here
-          console.log('Response:', response.data);
+          //console.log('Response:', response.data);
 
           // Storing the JWT access token
           sessionStorage.setItem('accessToken', response.data);
 
           // Retrieve token from sessionStorage
-           const storedToken = sessionStorage.getItem('accessToken');
+          const storedToken = sessionStorage.getItem('accessToken');
 
           sessionStorage.setItem('isTokenGenerated',1)
 
@@ -97,12 +97,13 @@ const App = () => {
   }, [isAuthenticated]);
 
 
- // sessionStorage.setItem('isTokenGenerated',0)
+   // sessionStorage.setItem('isTokenGenerated',0)
 
 
  // sessionStorage.setItem('isUserAuthenticated',false)
 
- 
+ const AccessToken = sessionStorage.getItem('accessToken');
+console.log(AccessToken)
 
   if (error) {
     return <div>Oops... {error.message}</div>;

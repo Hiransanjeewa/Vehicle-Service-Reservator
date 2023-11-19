@@ -103,6 +103,11 @@ public class AppController {
         //return "Hello";
 
 
+@GetMapping("/reservations")
+public String testtoken(){
+        return "Private Endpoint Accessed";
+}
+
 
 
 //    private String exchangeCodeForAccessToken(String code) {

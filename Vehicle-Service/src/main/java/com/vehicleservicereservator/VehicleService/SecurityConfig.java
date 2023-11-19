@@ -3,6 +3,7 @@ package com.vehicleservicereservator.VehicleService;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.web.SecurityFilterChain;
@@ -24,8 +25,10 @@ public class SecurityConfig {
         return http
                 .authorizeHttpRequests((authorize) -> authorize
                     .requestMatchers("/api/public").permitAll()
-                    .requestMatchers("/api/private").authenticated()
-                    .requestMatchers("/api/private-scoped").hasAuthority("SCOPE_read:messages")
+                  //  .requestMatchers("/api/private").authenticated()
+                        //.antMatchers(HttpMethod.POST, "/api/reservations").hasAuthority("add:reservations")
+                        .requestMatchers("/api/reservations").authenticated()
+                        .requestMatchers("/api/private-scoped").hasAuthority("SCOPE_read:messages")
                 )
                 .cors(withDefaults())
                 .oauth2ResourceServer(oauth2 -> oauth2
@@ -34,3 +37,4 @@ public class SecurityConfig {
                 .build();
     }
 }
+
